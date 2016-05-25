@@ -6,7 +6,15 @@
     margin-left: 15pt;
 }
 
+.f-l {
+    float: left;
+}
 
+
+.error-message {
+    color: #e72122;
+    margin-bottom: 5px;
+}
 
 
 
@@ -53,6 +61,12 @@
 
 .forwarder-title {
     margin: 10pt;
+}
+
+#forwarder-remember {
+    width: 50%;
+    margin-left: 25%;
+    margin-bottom: 10px;
 }
 
 

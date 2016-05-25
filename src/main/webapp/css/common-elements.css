@@ -1,11 +1,11 @@
 @font-face {
     font-family: Cucumbers;
-    src: url(../font/attack-of-the-cucumbers.ttf);
+    src: url(/font/attack-of-the-cucumbers.ttf);
 }
 
 @font-face {
     font-family: Scriptin;
-    src: url(../font/Scriptin.ttf);
+    src: url(/font/Scriptin.ttf);
 }
 
 
