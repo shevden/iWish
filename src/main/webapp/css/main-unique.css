@@ -45,7 +45,50 @@
 	margin-top: -15pt;
 }
 
+#recognized {
+	float: left;
+	min-width: 200px;
+	margin-left: 15pt;
+	margin-top: -15pt;
+}
 
+#recognized-label {
+	float: left;
+	margin-top: 3pt;
+	margin-right: 10px;
+}
+
+#recognized-not-me {
+	float: left;
+	margin-top: 3pt;
+}
+
+#logout-btn {
+	float: left;
+	margin-left: 15pt;
+}
+
+#right-top-menu {
+    float: right;
+    margin-right: 15pt;
+    margin-top: -15pt;
+}
+
+#rtm-rm-and-cancel {
+    width: 50px;
+    margin-top: -20px;
+    float: right;
+    margin-right: 25px;
+}
+
+#rtm-rm-grouped {
+    margin-bottom: 5px;
+    width: 70px;
+}
+
+
+
+/* Common content related */
 
 #content {
 	min-height: 1100px;
@@ -56,7 +99,6 @@
 	margin-right: auto;
 	margin-left: auto;
 }
-
 
 #forwarder {
 	float: right;
@@ -71,9 +113,6 @@
 	border: 4px solid #FFFFFF;
 }
 
-
-
-
 #navigation {
 	float: left;
 	min-width: 200px;
@@ -83,7 +122,6 @@
 	font-weight: bold;
 	color: #FFFFFF;
 	text-align: center;
-
 	border: 4px solid #FFFFFF;
 }
 
@@ -94,22 +132,22 @@
     float: left;
 }
 
+#flex-content {
+	float: left;
+	width: 100%;
+	min-height: 85%;
+}
 
-/* Search box */
+
+
+
+/* Search related */
 
 #searchbox {
 	height: 30pt;
 	border: 4px solid #FFFFFF;
 	overflow: hidden;
     margin-left: 7px;
-}
-
-#add-wish-btn {
-	float: left;
-	min-width: 7em;
-	height: 30pt;
-	font-size: 18pt; 
-	font-weight: bold; 
 }
 
 #search-input {
@@ -135,6 +173,8 @@
 	margin-left: 10pt;
 	font-weight: bold; 
 }
+
+
 
 
 /* Demo Wish */
@@ -165,27 +205,23 @@
 	font-weight: bold;
 }
 
-/* Main */
-
-#flex-content {
-    float: left;
-    width: 100%;
-	min-height: 85%;
-}
 
 
-/* Add wish */
 
-#add-wish-btn-2 {
-    float: left;
-    min-width: 7em;
-    height: 30pt;
-    font-size: 18pt;
-    font-weight: bold;
+/* Standalone */
+
+#add-wish-btn {
+	float: left;
+	min-width: 7em;
+	height: 30pt;
+	font-size: 18pt;
+	font-weight: bold;
 }
 
 
 
+
+/* Common footer related  */
 
 #footer {
 	clear: both;

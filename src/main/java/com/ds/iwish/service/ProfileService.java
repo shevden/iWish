@@ -3,6 +3,7 @@ package com.ds.iwish.service;
 
 import com.ds.iwish.bean.Profile;
 import com.ds.iwish.data.repository.UserRepository;
+import com.ds.iwish.helper.ProfileHelper;
 import com.ds.iwish.helper.WebHelper;
 import com.ds.iwish.manager.ProfileManager;
 import org.apache.logging.log4j.LogManager;
@@ -26,7 +27,7 @@ public class ProfileService {
 
     public static final String COOKIE__PROFILE_ID = "c_profile_id";
 
-    public static final Logger LOG = LogManager.getLogger(ProfileService.class.getName());
+    public static final Logger LOG = LogManager.getLogger(ProfileService.class);
 
 
     private ProfileManager profileManager;
@@ -61,23 +62,46 @@ public class ProfileService {
         if (result != null) {
             return result;
         }
-        processRememberMe(profile);
         saveProfileInSession(profile);
+        processRememberMe(profile);
         return null;
     }
 
     private void processRememberMe(Profile profile) {
         if(profile.isRememberMe()) {
-            Cookie сookie = new Cookie(COOKIE__PROFILE_ID, String.valueOf(profile.getId()));
+            Cookie сookie = new Cookie(COOKIE__PROFILE_ID,
+                    String.valueOf(ProfileHelper.getProfileFromSession().getId()));
             сookie.setMaxAge(100500);
             WebHelper.getResponse().addCookie(сookie);
         }
     }
 
-    private void saveProfileInSession(Profile profile) {
-        Profile existingProfile = getUserRepository().getUserByEmail(profile.getEmail());
+    public boolean saveProfileInSession(Profile profile) {
+        Profile existingProfile;
+        if (profile.getId() > 0) {
+            existingProfile = getUserRepository().getUserById(profile.getId());
+        } else {
+            existingProfile = getUserRepository().getUserByEmail(profile.getEmail());
+        }
+        if(existingProfile == null) {
+            return false;
+        }
+
         HttpSession session = WebHelper.getSession();
         session.setAttribute(S_ATTR__PROFILE, existingProfile);
+        return true;
+    }
+
+    public void logout() {
+        Cookie [] cookies = WebHelper.getRequest().getCookies();
+        for (Cookie cookie : cookies) {
+            if (COOKIE__PROFILE_ID.equals(cookie.getName())) {
+                cookie.setMaxAge(0);
+                WebHelper.getResponse().addCookie(cookie);
+                break;
+            }
+        }
+        WebHelper.getSession().invalidate();
     }
 
 

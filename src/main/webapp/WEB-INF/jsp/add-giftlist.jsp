@@ -1,31 +1,16 @@
 <html>
 
 <head>
-    <title>iWish Homepage</title>
-    <link rel="stylesheet" type="text/css" href="../css/main-unique.css">
-    <link rel="stylesheet" type="text/css" href="../css/main-common.css">
-    <link rel="stylesheet" type="text/css" href="../css/common-elements.css">
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <%@ include file="common/head.jsp" %>
 </head>
 
 <body>
 
 <!-- Header: display of metainfo and logo. -->
 <div id="header">
-    <div id="header-title">iWish</div>
-    <div id="header-subtitle">Driven by the wishflow &nbsp; :::::::::::: &nbsp; Powered by the dreams</div>
-
-    <div id="header-left-region">
-        <div id="header-hello-lbl">Hello, Denys</div>
-        <div id="header-not-you-lnk"><a>(not you?)</a></div>
-        <button class="btn btn-info m-left-15">Logout</button>
-    </div>
-
-    <div id="header-right-region">
-        <button class="btn btn-warning">Cancel</button>
-        <button class="btn btn-info m-left-10">Friends</button>
-        <button class="btn btn-info m-left-10">Workshop</button>
-    </div>
+    <c:set var="showHeaderContents" value="true"/>
+    <c:set var="showHeaderCancel" value="true"/>
+    <%@ include file="common/header.jsp" %>
 </div>
 
 
@@ -83,6 +68,37 @@
                     </button>
                 </div>
             </div>
+
+            <div style="float: left; width: 50%;">
+                <div style="float: left; margin-top: 5px;">
+                    <div style="float: left; margin-top: 2px;">Friends</div>
+                    <select style="float: left; margin-left: 15px; width: 244pt; height: 18pt;"></select>
+                </div>
+
+                <div style="clear: both; font-size: 0.8em; padding-top: 10px;">
+                    <div style="clear: both;">
+                        <button class="btn btn-warning"
+                                style="float: left; font-weight: bold; width: 60pt; font-size: 0.8em; height: 20pt;">
+                            Remove
+                        </button>
+                        <div style="float: left; margin-left: 15px;">Friend 1</div>
+                    </div>
+                    <div style="clear: both;">
+                        <button class="btn btn-warning"
+                                style="float: left; font-weight: bold; width: 60pt; font-size: 0.8em; height: 20pt;">
+                            Remove
+                        </button>
+                        <div style="float: left; margin-left: 15px;">Friend 2</div>
+                    </div>
+                    <div style="clear: both;">
+                        <button class="btn btn-warning"
+                                style="float: left; font-weight: bold; width: 60pt; font-size: 0.8em; height: 20pt;">
+                            Remove
+                        </button>
+                        <div style="float: left; margin-left: 15px;">Friend 3</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -90,8 +106,7 @@
 </div>
 
 
-<!-- Footer: legal info. -->
-<div id="footer">Copyright 2016 iWish Ukraine. All rights reserved.</div>
+<%@ include file="common/footer.jsp" %>
 
 </body>
 

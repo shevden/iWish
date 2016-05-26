@@ -22,12 +22,12 @@ import java.util.List;
 @Repository
 public class UserDAO extends GenericDAO {
 
-    public static final String SQL_SELECT_FROM_USERS_BY_ID = "select * from i_user where id = ?";
+    public static final String SQL_SELECT_FROM_USERS_BY_ID = "select * from i_user where user_id = ?";
     public static final String SQL_SELECT_FROM_USERS_BY_EMAIL = "select * from i_user where email = ?";
     public static final String SQL_SELECT_FROM_USERS_BY_NAME_WITH_LIMIT = "select * from i_user where first_name like ? limit ?, ?";
     public static final String SQL_INSERT_INTO_USERS = "insert into i_user (password_hash, email, first_name, last_name) values (?, ?, ?, ?)";
-    public static final String SQL_UPDATE_USERS_BY_ID = "update i_user set password_hash=?, email=?, first_name=?, last_name=? where id = ?";
-    public static final String SQL_DELETE_FROM_USERS_BY_ID = "delete from i_user where id = ?";
+    public static final String SQL_UPDATE_USERS_BY_ID = "update i_user set password_hash=?, email=?, first_name=?, last_name=? where user_id = ?";
+    public static final String SQL_DELETE_FROM_USERS_BY_ID = "delete from i_user where user_id = ?";
 
 
     private JdbcTemplate mJdbcTemplate;

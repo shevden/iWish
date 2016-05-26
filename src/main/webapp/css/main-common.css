@@ -1,3 +1,5 @@
+/* Common */
+
 .m-left-10 {
     margin-left: 10pt;
 }
@@ -10,6 +12,9 @@
     float: left;
 }
 
+.f-r {
+    float: right;
+}
 
 .error-message {
     color: #e72122;
@@ -19,8 +24,7 @@
 
 
 
-
-
+/* Right block related */
 
 .forwarder-fixed {
     margin: 0;
@@ -71,6 +75,8 @@
 
 
 
+
+/* Homepage banner related */
 
 .main-banner {
     min-height: 500px;
@@ -132,11 +138,13 @@
 
 
 
+
+/* Left block related */
+
 .nav-block {
     padding: 10pt 0;
     padding-bottom: 0;
 }
-
 
 .nav-btn {
     width: 100%;

@@ -58,7 +58,7 @@ public class ProfileManager {
         return result;
     }
 
-    public void generatePasswordHash(Profile profile) {
+    private void generatePasswordHash(Profile profile) {
         profile.setPasswordHash(String.valueOf(profile.getPassword().hashCode()));
     }
 

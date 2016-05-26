@@ -1,36 +1,18 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 
 <head>
-    <title>iWish Homepage</title>
-    <link rel="stylesheet" type="text/css" href="../css/main-unique.css">
-    <link rel="stylesheet" type="text/css" href="../css/main-common.css">
-    <link rel="stylesheet" type="text/css" href="../css/common-elements.css">
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <%@ include file="common/head.jsp" %>
 </head>
 
 <body>
 
 <!-- Header: display of metainfo and logo. -->
 <div id="header">
-    <div id="header-title">iWish</div>
-    <div id="header-subtitle">Driven by the wishflow &nbsp; :::::::::::: &nbsp; Powered by the dreams</div>
-
-    <div style="float: left; margin-left: 15pt; margin-top: -15pt;">
-        <div style="float: left; margin-top: 3pt;">Hello, Denys</div>
-        <div style="float: left; margin-left: 5pt; margin-top: 3pt;"><a>(not you?)</a></div>
-        <button class="btn btn-info" style="margin-left: 15pt;">Logout</button>
-    </div>
-
-    <div style="float: right; margin-right: 15pt; margin-top: -15pt;">
-        <div style="float: right;">
-            <button class="btn btn-info" style="margin-left: 10pt;">Friends</button>
-            <button class="btn btn-info" style="margin-left: 10pt;">Workshop</button>
-        </div>
-        <div style="width: 50px; margin-top: -20px; float: right; margin-right: 25px;">
-            <button class="btn btn-danger" style="margin-bottom: 5px; width: 70px;">RM</button>
-            <button class="btn btn-warning">Cancel</button>
-        </div>
-    </div>
+    <c:set var="showHeaderContents" value="true"/>
+    <c:set var="showHeaderRMandCancel" value="true"/>
+    <%@ include file="common/header.jsp" %>
 </div>
 
 
@@ -71,9 +53,11 @@
                 </div>
                 <div style="float: left; width: 100%; margin-top: 15px;">
                     <div style="float: left; margin-top: 5px;">Text color</div>
-                    <button class="btn btn-success"
+                    <button id="text-color-btn"
+                            class="btn btn-success jscolor {valueElement:'chosen-color-3', onFineChange:'setTextColorBtn(this)'}"
                             style="float: left; font-weight: bold; margin-left: 45px; width: 100pt;">Select
                     </button>
+                    <input type="hidden" id="chosen-color-3" value="000000"/>
                 </div>
                 <div style="float: left; width: 100%; margin-top: 15px;">
                     <div style="float: left; margin-top: 5px;">Border color</div>
@@ -125,9 +109,17 @@
 
 </div>
 
+<%@ include file="common/footer.jsp" %>
 
-<!-- Footer: legal info. -->
-<div id="footer">Copyright 2016 iWish Ukraine. All rights reserved.</div>
+
+
+<script src="<c:url value="/js/jscolor.min.js"/>"></script>
+
+<script>
+    function setTextColorBtn(picker) {
+        document.getElementsByTagName('text-color-btn')[0].style.color = '#' + picker.toString()
+    }
+</script>
 
 </body>
 

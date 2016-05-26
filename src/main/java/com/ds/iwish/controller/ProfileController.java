@@ -36,6 +36,14 @@ public class ProfileController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/user/logout", method = RequestMethod.GET)
+    public ModelAndView getLogout() {
+        ModelAndView modelAndView = new ModelAndView();
+        getProfileService().logout();
+        modelAndView.setViewName(VIEW_NAME__LOGIN);
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/user/register", method = RequestMethod.GET)
     public ModelAndView getRegister() {
         ModelAndView modelAndView = new ModelAndView();
