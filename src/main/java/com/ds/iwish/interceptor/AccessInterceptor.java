@@ -60,7 +60,7 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
 
     private boolean processUnrecognizedProfile(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
-        if (isRecognizable(request, response)) {
+        if (isRecognizable(request)) {
             return processRecognizedProfile(request, response);
         }
         if (goingToUnrecognizedOnlyPage(request)) {
@@ -70,7 +70,7 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
         return false;
     }
 
-    private boolean isRecognizable(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private boolean isRecognizable(HttpServletRequest request) throws IOException {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {

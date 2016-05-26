@@ -1,2 +1,2 @@
 <!-- Footer: legal info. -->
-<div id="footer">Copyright 2016 iWish Ukraine. All rights reserved.</div>
+<div id="footer">Copyright &copy; 2016 iWish Ukraine. All rights reserved.</div>

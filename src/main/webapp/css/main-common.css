@@ -16,6 +16,19 @@
     float: right;
 }
 
+.c-b {
+    clear: both;
+}
+
+.grey {
+    color: grey;
+}
+
+.half-to-left {
+    float: left;
+    width: 50%;
+}
+
 .error-message {
     color: #e72122;
     margin-bottom: 5px;
@@ -167,3 +180,127 @@
 }
 
 
+
+
+/* Content related */
+
+.workshop {
+    background: #0099cc;
+    color: #FFFFFF;
+}
+
+.stage-title {
+    float: left;
+    min-width: 800px;
+    max-width: 1100px;
+    min-height: 30pt;
+    font-size: 20pt;
+    margin-left: 25px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.edit-generic-label {
+    float: left;
+    margin-top: 2px;
+}
+
+.edit-priority-in {
+    float: left;
+    width: 100pt;
+    height: 18pt;
+    margin-left: 15px;
+}
+
+.edit-color-btn-wrapper {
+    float: left;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.edit-bg-color-btn {
+    float: left;
+    font-weight: bold;
+    width: 160pt;
+    background: #FFF;
+    color: #000;
+}
+
+.edit-fg-color-btn {
+    float: left;
+    font-weight: bold;
+    width: 160pt;
+    background: #000;
+    color: #FFF;
+}
+
+.edit-generic-wrapper-lt5 {
+    float: left;
+    margin-top: 5px;
+}
+
+.btns-list {
+    clear: both;
+    font-size: 0.8em;
+    padding-top: 10px;
+}
+
+.btns-remove {
+    float: left;
+    width: 60pt;
+    height: 20pt;
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+.btns-remove-label {
+    float: left;
+    margin-left: 15px;
+}
+
+.select-generic-wrapper {
+    float: left;
+    margin-top: 10px;
+}
+
+.select-generic {
+    float: left;
+    width: 224pt;
+    height: 18pt;
+}
+
+.pick-color-btn-generic {
+    float: left;
+    width: 100pt;
+    font-weight: bold;
+}
+
+.loaded-image-name {
+    clear:both;
+    float: left;
+    font-size: 0.8em;
+}
+
+.select-img-btn {
+    float: left;
+    width: 100pt;
+    margin-left: 25px;
+    font-weight: bold;
+}
+
+.wish-category-tag-wrapper {
+    clear: both;
+    float: left;
+    margin-left: 15px;
+}
+
+.wish-category-tag {
+    padding: 5px 10px;
+    text-align: center;
+}
+
+.wish-remote-link {
+    clear: both;
+    float: left;
+    margin-left: 15px;
+}

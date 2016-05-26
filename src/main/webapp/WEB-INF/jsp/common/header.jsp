@@ -32,7 +32,7 @@
                 <button class="btn btn-danger">RM</button>
             </c:if>
 
-            <a href="<c:url value="/friends"/>">
+            <a href="<c:url value="/user/friends"/>">
                 <button class="btn btn-info m-left-10">Friends</button>
             </a>
 

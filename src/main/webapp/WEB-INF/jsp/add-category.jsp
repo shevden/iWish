@@ -6,7 +6,7 @@
 
 <body>
 
-<!-- Header: display of metainfo and logo. -->
+
 <div id="header">
     <c:set var="showHeaderContents" value="true"/>
     <c:set var="showHeaderCancel" value="true"/>
@@ -14,60 +14,40 @@
 </div>
 
 
-<div id="flex-content">
+<div id="content">
 
-    <!-- Forwarder: navigate user to login/register/start. -->
-    <div id="navigation">
-        <div class="white-dashed-bottom nav-block">
-            <div class="nav-title">Your Categories:</div>
-            <div class="nav-empty-elm">Default CAT</div>
-            <button class="btn btn-success nav-btn">Add Category</button>
-        </div>
-        <div class="white-dashed-bottom nav-block">
-            <div class="nav-title">Your Wishlists:</div>
-            <div class="nav-empty-elm">No wishlists, yet</div>
-            <button class="btn btn-success nav-btn">Add Wishlist</button>
-        </div>
-        <div class="nav-block">
-            <div class="nav-title">Your Giftlists:</div>
-            <div class="nav-empty-elm">No giftlists, yet</div>
-            <button class="btn btn-success nav-btn">Add Giftlist</button>
-        </div>
-    </div>
+    <%@ include file="navigation/wish-navigation.jsp" %>
 
-    <div style="margin-left: 210px; min-width: 1000px;">
-        <div id="searchbox">
-            <button id="add-wish-btn" class="btn btn-success">Save</button>
-            <input type="text" id="search-input"/>
-            <button id="search-btn" class="btn btn-success">Search</button>
-            <div id="search-radio-wrp">
-                <input type="radio" name="group1" value=""> By Wish
-                <br/>
-                <input type="radio" name="group1" value="" checked> By Category
-            </div>
-        </div>
+    <div id="content-main">
+
+        <button id="near-search-btn" class="btn btn-success">Save</button>
+
+        <%@ include file="search/search-wish.jsp" %>
 
         <div id="stage">
-            <div style="width: 45%; min-width: 450px; float: left; clear: both;">
-                <div style="float: left; width: 100%; height: 30pt;">
-                    <div style="float: left; font-size: 20pt; margin-top: 10px; ">Title</div>
-                    <input type="text" style="float: left; height: 22pt; width: 370px; margin-left: 15px; margin-top: 5px;"/>
+
+            <div id="main-edit-block">
+
+                <div id="edit-title-wrapper">
+                    <div id="edit-title-label">Title</div>
+                    <input type="text" id="edit-title-in"/>
                 </div>
-                <div style="float: left; width: 100%; margin-top: 10px;">
-                    <div style="float: left; margin-top: 2px;">Priority</div>
-                    <input type="text" style="float: left; margin-left: 15px; width: 100pt; height: 18pt;"/>
+
+                <div id="edit-priority-wrapper">
+                    <div class="edit-generic-label">Priority</div>
+                    <input type="text" class="edit-priority-in"/>
                 </div>
-                <div style="float: left; width: 100%; margin-top: 15px;">
-                    <button class="btn btn-success" style="float: left; font-weight: bold; width: 160pt;
-                    background: #FFF; color: #000; ">Select background
-                    </button>
+
+                <div class="edit-color-btn-wrapper">
+                    <button class="btn btn-success edit-bg-color-btn">Select background</button>
                 </div>
-                <div style="float: left; width: 100%; margin-top: 15px;">
-                    <button class="btn btn-success" style="float: left; font-weight: bold; width: 160pt;
-                    background: #000; color: #FFF;">Select foreground
-                    </button>
+
+                <div class="edit-color-btn-wrapper">
+                    <button class="btn btn-success edit-fg-color-btn">Select foreground</button>
                 </div>
+
             </div>
+
         </div>
 
     </div>
@@ -79,4 +59,4 @@
 
 </body>
 
-<html>
+</html>

@@ -25,7 +25,7 @@
 
             <div class="error-message">${errorMessage}</div>
 
-			<form method="post" action="/user/register">
+			<form method="post" action="<c:url value="/user/register"/>" >
 				<div>Username (email):</div>
 				<input type="text" name="email" class="forwarder-in" />
 
@@ -54,4 +54,4 @@
 
 </body>
 
-<html>
+</html>

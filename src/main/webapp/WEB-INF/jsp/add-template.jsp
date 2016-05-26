@@ -8,7 +8,7 @@
 
 <body>
 
-<!-- Header: display of metainfo and logo. -->
+
 <div id="header">
     <c:set var="showHeaderContents" value="true"/>
     <c:set var="showHeaderRMandCancel" value="true"/>
@@ -16,90 +16,84 @@
 </div>
 
 
-<div id="flex-content" style="background: #a0d8f1;">
+<div id="content" class="workshop">
 
-    <!-- Forwarder: navigate user to login/register/start. -->
-    <div id="navigation" style="background: #a0d8f1; color: #000000; border: none; margin-left: 15px;">
-        <div class="nav-block">
-            <div class="nav-title">Your Templates:</div>
-            <button class="btn btn-success nav-btn">Add Template</button>
-            <div class="nav-empty-elm">Template 1</div>
-            <div class="nav-empty-elm">Template 2</div>
-        </div>
-    </div>
+    <c:set var="isTemplate" value="true"/>
+    <%@ include file="navigation/workshop-navigation.jsp" %>
 
-    <div style="margin-left: 240px; min-width: 1000px;">
+    <div id="content-workshop">
 
         <div id="stage">
-            <button id="add-wish-btn" class="btn btn-success" style="margin: 10px 0;">Save</button>
 
-            <div style="width: 45%; min-width: 450px; float: left; clear: both;">
+            <button id="main-workshop-btn" class="btn btn-success">Save</button>
 
-                <div style="float: left; width: 100%; height: 30pt;">
-                    <div style="float: left; font-size: 20pt; margin-top: 10px; ">Title</div>
-                    <input type="text" style="float: left; height: 22pt; width: 370px; margin-left: 15px; margin-top: 5px;"/>
+            <div id="main-edit-block">
+
+                <div id="edit-title-wrapper">
+                    <div id="edit-title-label">Title</div>
+                    <input type="text" id="edit-title-in"/>
                 </div>
-                <div style="float: left; width: 100%; margin-top: 15px;">
-                    <div style="float: left; margin-top: 5px;">Main color</div>
-                    <button class="btn btn-success"
-                            style="float: left; font-weight: bold; margin-left: 42px; width: 100pt;">Select
-                    </button>
+
+                <div class="edit-color-btn-wrapper">
+                    <div class="edit-generic-wrapper-lt5">Main color</div>
+                    <button class="btn btn-success pick-color-btn-generic" style="margin-left: 42px;">Select</button>
                 </div>
-                <div style="float: left; width: 100%; margin-top: 15px;">
-                    <div style="float: left; margin-top: 5px;">Title color</div>
-                    <button class="btn btn-success"
-                            style="float: left; font-weight: bold; margin-left: 45px; width: 100pt;">Select
-                    </button>
+
+                <div class="edit-color-btn-wrapper">
+                    <div class="edit-generic-wrapper-lt5">Title color</div>
+                    <button class="btn btn-success pick-color-btn-generic" style="margin-left: 45px;">Select</button>
                 </div>
-                <div style="float: left; width: 100%; margin-top: 15px;">
-                    <div style="float: left; margin-top: 5px;">Text color</div>
+
+                <div class="edit-color-btn-wrapper">
+                    <div class="edit-generic-wrapper-lt5">Text color</div>
                     <button id="text-color-btn"
-                            class="btn btn-success jscolor {valueElement:'chosen-color-3', onFineChange:'setTextColorBtn(this)'}"
-                            style="float: left; font-weight: bold; margin-left: 45px; width: 100pt;">Select
-                    </button>
+                            class="btn btn-success pick-color-btn-generic jscolor {valueElement:'chosen-color-3', onFineChange:'setTextColorBtn(this)'}"
+                            style="margin-left: 45px;">Select</button>
                     <input type="hidden" id="chosen-color-3" value="000000"/>
                 </div>
-                <div style="float: left; width: 100%; margin-top: 15px;">
-                    <div style="float: left; margin-top: 5px;">Border color</div>
-                    <button class="btn btn-success"
-                            style="float: left; font-weight: bold; margin-left: 21px; width: 100pt;">Select
-                    </button>
+
+                <div class="edit-color-btn-wrapper">
+                    <div class="edit-generic-wrapper-lt5">Border color</div>
+                    <button class="btn btn-success pick-color-btn-generic" style="margin-left: 21px;">Select</button>
                 </div>
 
-                <div style="float: left; margin-top: 10px;">
-                    <div style="float: left; margin-top: 2px;">Border type</div>
-                    <select style="float: left; margin-left: 26px; width: 224pt; height: 18pt;"></select>
+                <div class="select-generic-wrapper">
+                    <div class="edit-generic-label">Border type</div>
+                    <select class="select-generic" style="margin-left: 26px;"></select>
                 </div>
 
-                <div style="float: left; margin-top: 10px;">
-                    <div style="float: left; margin-top: 2px;">Border width</div>
-                    <select style="float: left; margin-left: 15px; width: 224pt; height: 18pt;"></select>
+                <div class="select-generic-wrapper">
+                    <div class="edit-generic-label">Border width</div>
+                    <select class="select-generic" style="margin-left: 15px;;"></select>
                 </div>
-
-
 
             </div>
 
-            <div style="float: left; width: 50%;">
-                <div style="float: left; margin-top: 10px;">
-                    <div style="float: left; margin-top: 2px;">Title Style</div>
-                    <select style="float: left; margin-left: 15px; width: 224pt; height: 18pt;"></select>
+            <div class="half-to-left">
+
+                <div class="select-generic-wrapper">
+                    <div class="edit-generic-label">Title Style</div>
+                    <select class="select-generic" style="margin-left: 15px;"></select>
                 </div>
-                <div style="float: left; margin-top: 10px;">
-                    <div style="float: left; margin-top: 2px;">Title Font</div>
-                    <select style="float: left; margin-left: 20px; width: 224pt; height: 18pt;"></select>
+
+                <div class="select-generic-wrapper">
+                    <div class="edit-generic-label">Title Font</div>
+                    <select class="select-generic" style="margin-left: 20px;"></select>
                 </div>
-                <div style="float: left; margin-top: 10px;">
-                    <div style="float: left; margin-top: 2px;">Text Style</div>
-                    <select style="float: left; margin-left: 15px; width: 224pt; height: 18pt;"></select>
+
+                <div class="select-generic-wrapper">
+                    <div class="edit-generic-label">Text Style</div>
+                    <select class="select-generic" style="margin-left: 15px;"></select>
                 </div>
-                <div style="float: left; margin-top: 10px;">
-                    <div style="float: left; margin-top: 2px;">Text Font</div>
-                    <select style="float: left; margin-left: 20px; width: 224pt; height: 18pt;"></select>
+
+                <div class="select-generic-wrapper">
+                    <div class="edit-generic-label">Text Font</div>
+                    <select class="select-generic" style="margin-left: 20px;"></select>
                 </div>
-                <div style="float: left; margin-top: 10px;">
-                    <div style="float: left; margin-top: 2px;">Image Position</div>
-                    <select style="float: left; margin-left: 20px; width: 185pt; height: 18pt;"></select>
+
+                <div class="select-generic-wrapper">
+                    <div class="edit-generic-label">Image Position</div>
+                    <select id="select-image-position"></select>
                 </div>
 
             </div>
