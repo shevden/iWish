@@ -28,8 +28,10 @@
                 <button class="btn btn-warning">Cancel</button>
             </c:if>
 
-            <c:if test="${showHeaderRM}">
-                <button class="btn btn-danger">RM</button>
+            <c:if test="${headerRM ne null}">
+                <a href="${headerRM}">
+                    <button class="btn btn-danger">RM</button>
+                </a>
             </c:if>
 
             <a href="<c:url value="/user/friends"/>">

@@ -267,6 +267,8 @@
     float: left;
     width: 224pt;
     height: 18pt;
+    font-weight: bold;
+    font-size: 9pt;
 }
 
 .pick-color-btn-generic {

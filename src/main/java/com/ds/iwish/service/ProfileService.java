@@ -34,20 +34,6 @@ public class ProfileService {
     private UserRepository userRepository;
 
 
-    public Profile getProfileById(long pId) {
-        LOG.info("Inside #getProfileById : (pId = {})", pId);
-        Profile Profile = getUserRepository().getUserById(pId);
-        LOG.info("Leaving #getProfileById : (Profile = {})", Profile);
-        return Profile;
-    }
-
-    public List<Profile> getProfilesByName(String pName, int pPageSize, int pPageNum) {
-        LOG.info("Inside #getProfilesByName : (pName = {}, pPageSize = {}, pPageNum = {})", pName, pPageSize, pPageNum);
-        List<Profile> Profiles = getUserRepository().getUsersByName(pName, pPageSize, pPageNum);
-        LOG.info("Leaving #getProfilesByName : (Profiles.size() = {})", Profiles);
-        return Profiles;
-    }
-
     public String createProfile(Profile profile) {
         String result = getProfileManager().validateProfileForRegistration(profile);
         if (result != null) {
