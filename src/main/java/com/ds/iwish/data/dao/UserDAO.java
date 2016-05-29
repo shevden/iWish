@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -24,10 +25,20 @@ public class UserDAO extends GenericDAO {
 
     public static final String SQL_SELECT_FROM_USERS_BY_ID = "select * from i_user where user_id = ?";
     public static final String SQL_SELECT_FROM_USERS_BY_EMAIL = "select * from i_user where email = ?";
-    public static final String SQL_SELECT_FROM_USERS_BY_NAME_WITH_LIMIT = "select * from i_user where first_name like ? limit ?, ?";
-    public static final String SQL_INSERT_INTO_USERS = "insert into i_user (password_hash, email, first_name, last_name) values (?, ?, ?, ?)";
-    public static final String SQL_UPDATE_USERS_BY_ID = "update i_user set password_hash=?, email=?, first_name=?, last_name=? where user_id = ?";
-    public static final String SQL_DELETE_FROM_USERS_BY_ID = "delete from i_user where user_id = ?";
+    public static final String SQL_SELECT_FROM_USERS_NOT_FRIENDS = "select * from i_user f where (first_name like ? " +
+            "or first_name like ? or last_name like ? or last_name like ?) and 0 = (select COUNT(*) from friend where " +
+            "(user_id = ? and friend_id = f.user_id) or (friend_id = ? and user_id = f.user_id))";
+    public static final String SQL_INSERT_INTO_FRIEND = "insert into friend (user_id, friend_id) values (?, ?)";
+    public static final String SQL_SELECT_FROM_USERS_PENDING_ACTION = "select * from i_user where user_id in " +
+            "(select user_id from friend where friend_id = ? and approved is null)";
+    public static final String SQL_SELECT_FROM_USER_BY_FRIEND = "select * from i_user u where user_id in " +
+            "(select user_id from friend where friend_id = ?) or " +
+            "user_id in (select friend_id from friend where user_id = ?)";
+    public static final String SQL_INSERT_INTO_USERS = "insert into i_user (password_hash, email, first_name, last_name) " +
+            "values (?, ?, ?, ?)";
+    public static final String SQL_UPDATE_FRIEND = "update friend set approved = ? where user_id = ? and friend_id = ?";
+    public static final String SQL_DELETE_FROM_FRIEND = "delete from friend where (user_id = ? and friend_id = ?) or " +
+            "(user_id = ? and friend_id = ?)";
 
 
     private JdbcTemplate mJdbcTemplate;
@@ -51,15 +62,32 @@ public class UserDAO extends GenericDAO {
         return users.size() == 1? users.get(0): null;
     }
 
-    public List<Profile> getUsersByName(String firstName, int pageSize, int pageNum) {
-        return mJdbcTemplate.query(SQL_SELECT_FROM_USERS_BY_NAME_WITH_LIMIT,
+    public List<Profile> getUsersByName(String firstName, String lastName, long userId) {
+        return mJdbcTemplate.query(SQL_SELECT_FROM_USERS_NOT_FRIENDS,
                 new Object[]{
                         getStringForSqlLikeClause(firstName),
-                        getIndexFrom(pageSize, pageNum),
-                        pageSize
+                        getStringForSqlLikeClause(lastName),
+                        getStringForSqlLikeClause(firstName),
+                        getStringForSqlLikeClause(lastName),
+                        userId,
+                        userId
                 },
                 new UserRowMapper()
         );
+    }
+
+    public void createFriendship(long userId, long otherUserId) {
+        mJdbcTemplate.update(SQL_INSERT_INTO_FRIEND, userId, otherUserId);
+    }
+
+    public List<Profile> getUnapprovedFriends(long profileId) {
+        List<Profile> users = mJdbcTemplate.query(SQL_SELECT_FROM_USERS_PENDING_ACTION, new Object[]{profileId},
+                new UserRowMapper());
+        return users == null ? Collections.emptyList() : users;
+    }
+
+    public void updateFriendship(long userId, long otherUserId, boolean isApproved) {
+        mJdbcTemplate.update(SQL_UPDATE_FRIEND, isApproved, otherUserId, userId);
     }
 
     public Profile createUser(final Profile user) {
@@ -78,14 +106,14 @@ public class UserDAO extends GenericDAO {
         return user;
     }
 
-    public Profile updateUser(Profile user) {
-        mJdbcTemplate.update(SQL_UPDATE_USERS_BY_ID, user.getPasswordHash(), user.getEmail(),
-                user.getFirstName(), user.getLastName(), user.getId());
-        return user;
+    public List<Profile> getFriendUsers(long userId) {
+        List<Profile> users = mJdbcTemplate.query(SQL_SELECT_FROM_USER_BY_FRIEND, new Object[]{userId, userId},
+                new UserRowMapper());
+        return users == null ? Collections.emptyList() : users;
     }
 
-    public boolean deleteUser(long userId) {
-        mJdbcTemplate.update(SQL_DELETE_FROM_USERS_BY_ID, userId);
+    public boolean deleteFriendship(long userId, long otherUserId) {
+        mJdbcTemplate.update(SQL_DELETE_FROM_FRIEND, userId, otherUserId, otherUserId, userId);
         return true;
     }
 

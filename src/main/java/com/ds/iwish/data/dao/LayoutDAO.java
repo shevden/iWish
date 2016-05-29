@@ -62,7 +62,16 @@ public class LayoutDAO extends GenericDAO {
     }
 
     public Layout updateLayout(Layout layout) {
-        mJdbcTemplate.update(SQL_UPDATE_LAYOUT_BY_ID, layout);
+        mJdbcTemplate.update(SQL_UPDATE_LAYOUT_BY_ID,
+                layout.getTitle(),
+                layout.getModel(),
+                layout.getWidth(),
+                layout.getHeight(),
+                layout.getPadding(),
+                layout.getPadding(),
+                layout.getUserId(),
+                layout.getLayoutId()
+        );
         return layout;
     }
 

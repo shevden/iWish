@@ -34,6 +34,10 @@ public class ProfileService {
     private UserRepository userRepository;
 
 
+    public Profile getProfile(long id) {
+        return getUserRepository().getUserById(id);
+    }
+
     public String createProfile(Profile profile) {
         String result = getProfileManager().validateProfileForRegistration(profile);
         if (result != null) {
