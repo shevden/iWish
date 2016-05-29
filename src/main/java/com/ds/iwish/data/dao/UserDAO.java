@@ -1,5 +1,6 @@
 package com.ds.iwish.data.dao;
 
+import com.ds.iwish.bean.Layout;
 import com.ds.iwish.bean.Profile;
 import com.ds.iwish.data.dao.generic.GenericDAO;
 import com.ds.iwish.data.mapper.UserRowMapper;
@@ -36,6 +37,8 @@ public class UserDAO extends GenericDAO {
             "user_id in (select friend_id from friend where user_id = ?)";
     public static final String SQL_INSERT_INTO_USERS = "insert into i_user (password_hash, email, first_name, last_name) " +
             "values (?, ?, ?, ?)";
+    public static final String SQL_UPDATE_USER_DEFAULTS = "update i_user set def_category_id = ?, " +
+            "def_layout_id =?, def_template_id = ? where user_id = ?";
     public static final String SQL_UPDATE_FRIEND = "update friend set approved = ? where user_id = ? and friend_id = ?";
     public static final String SQL_DELETE_FROM_FRIEND = "delete from friend where (user_id = ? and friend_id = ?) or " +
             "(user_id = ? and friend_id = ?)";
@@ -104,6 +107,15 @@ public class UserDAO extends GenericDAO {
         }, keyHolder);
         user.setId(keyHolder.getKey().longValue());
         return user;
+    }
+
+    public void updateDefaults(Profile profile) {
+        mJdbcTemplate.update(SQL_UPDATE_USER_DEFAULTS,
+            profile.getDefaultCategory(),
+            profile.getDefaultLayout(),
+            profile.getDefaultTemplate(),
+            profile.getId()
+        );
     }
 
     public List<Profile> getFriendUsers(long userId) {

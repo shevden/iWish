@@ -28,6 +28,9 @@ public class UserRowMapper implements RowMapper<Profile> {
         user.setPasswordHash(pResultSet.getString(USER_COLUMN_PASSWORD_HASH));
         user.setFirstName(pResultSet.getString(USER_COLUMN_FIRST_NAME));
         user.setLastName(pResultSet.getString(USER_COLUMN_LAST_NAME));
+        user.setDefaultCategory(pResultSet.getLong("def_category_id"));
+        user.setDefaultLayout(pResultSet.getLong("def_layout_id"));
+        user.setDefaultTemplate(pResultSet.getLong("def_template_id"));
         return user;
     }
 

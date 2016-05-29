@@ -42,7 +42,8 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
     private boolean processRecognizedProfile(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         if (goingToUnrecognizedOnlyPage(request)) {
-            response.sendRedirect("/view-category");
+            Profile profile = ProfileHelper.getProfileFromSession();
+            response.sendRedirect("/catalog/view-category/" + profile.getDefaultCategory());
             return false;
         }
         return true;

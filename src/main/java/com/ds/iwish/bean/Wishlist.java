@@ -8,7 +8,10 @@ public class Wishlist {
     private int priority;
     private String background;
     private String color;
+    private long layoutId;
+    private long userId;
 
+    private transient String priorityRaw;
     private transient boolean giftlist;
 
 
@@ -50,6 +53,30 @@ public class Wishlist {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public long getLayoutId() {
+        return layoutId;
+    }
+
+    public void setLayoutId(long layoutId) {
+        this.layoutId = layoutId;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public String getPriorityRaw() {
+        return priorityRaw;
+    }
+
+    public void setPriorityRaw(String priorityRaw) {
+        this.priorityRaw = priorityRaw;
     }
 
     public boolean isGiftlist() {

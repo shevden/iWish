@@ -43,9 +43,12 @@ public class ProfileService {
         if (result != null) {
             return result;
         }
+        getProfileManager().generatePasswordHash(profile);
         getUserRepository().createUser(profile);
+        getUserRepository().assignDefaultPresets(profile);
         return null;
     }
+
 
     public String loginProfile(Profile profile) {
         String result = getProfileManager().validateProfileForLogin(profile);

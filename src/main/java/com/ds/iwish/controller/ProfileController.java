@@ -59,7 +59,7 @@ public class ProfileController {
         setupNewProfile(newProfile, request);
         String errorMessage = getProfileService().createProfile(newProfile);
         if(errorMessage == null) {
-            modelAndView.setViewName("redirect:/view-category");
+            modelAndView.setViewName("redirect:/catalog/view-category/" + newProfile.getDefaultCategory());
         } else {
             modelAndView.addObject(ATTR__ERROR_MESSAGE, errorMessage);
             modelAndView.setViewName(VIEW_NAME__REGISTER);
@@ -84,7 +84,7 @@ public class ProfileController {
         setupExistingProfile(newProfile, request);
         String errorMessage = getProfileService().loginProfile(newProfile);
         if(errorMessage == null) {
-            modelAndView.setViewName("redirect:/view-category");
+            modelAndView.setViewName("redirect:/catalog/view-category/" + newProfile.getDefaultCategory());
         } else {
             modelAndView.addObject(ATTR__ERROR_MESSAGE, errorMessage);
             modelAndView.setViewName(VIEW_NAME__LOGIN);

@@ -9,6 +9,10 @@ public class Profile {
     private String firstName;
     private String lastName;
 
+    private long defaultCategory;
+    private long defaultLayout;
+    private long defaultTemplate;
+
     private transient String password;
     private transient String passwordClone;
     private transient boolean rememberMe;
@@ -54,6 +58,29 @@ public class Profile {
         this.lastName = lastName;
     }
 
+    public long getDefaultCategory() {
+        return defaultCategory;
+    }
+
+    public void setDefaultCategory(long defaultCategory) {
+        this.defaultCategory = defaultCategory;
+    }
+
+    public long getDefaultLayout() {
+        return defaultLayout;
+    }
+
+    public void setDefaultLayout(long defaultLayout) {
+        this.defaultLayout = defaultLayout;
+    }
+
+    public long getDefaultTemplate() {
+        return defaultTemplate;
+    }
+
+    public void setDefaultTemplate(long defaultTemplate) {
+        this.defaultTemplate = defaultTemplate;
+    }
 
     public String getPassword() {
         return password;

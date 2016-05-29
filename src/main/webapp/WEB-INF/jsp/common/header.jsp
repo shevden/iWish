@@ -18,15 +18,12 @@
     <div id="right-top-menu">
         <div class="f-r">
 
-            <c:if test="${showHeaderEdit}">
-                <a href="<c:url value=""/>">
+            <c:if test="${headerEdit ne null}">
+                <a href="${headerEdit}">
                     <button class="btn btn-warning">Edit</button>
                 </a>
             </c:if>
 
-            <c:if test="${showHeaderCancel}">
-                <button class="btn btn-warning">Cancel</button>
-            </c:if>
 
             <c:if test="${headerRM ne null}">
                 <a href="${headerRM}">
@@ -43,17 +40,6 @@
             </a>
         </div>
 
-        <c:if test="${showHeaderRMandCancel}">
-            <div id="rtm-rm-and-cancel">
-                <a href="<c:url value=""/>">
-                    <button id="rtm-rm-grouped" class="btn btn-danger">RM</button>
-                </a>
-
-                <a href="<c:url value=""/>">
-                    <button class="btn btn-warning">Cancel</button>
-                </a>
-            </div>
-        </c:if>
     </div>
 
 </c:if>

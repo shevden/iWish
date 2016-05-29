@@ -11,7 +11,9 @@
 
 <div id="header">
     <c:set var="showHeaderContents" value="true"/>
-    <c:set var="headerRM" value="/workshop/rm-template/${requestScope.template.templateId}"/>
+    <c:if test="${sessionScope.profile.defaultTemplate ne requestScope.template.templateId}">
+        <c:set var="headerRM" value="/workshop/rm-template/${requestScope.template.templateId}"/>
+    </c:if>
     <%@ include file="common/header.jsp" %>
 </div>
 

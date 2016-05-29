@@ -11,7 +11,7 @@
 
 <div id="header">
     <c:set var="showHeaderContents" value="true"/>
-    <c:set var="showHeaderEdit" value="true"/>
+    <c:set var="headerEdit" value="/catalog/edit-category/${currentCategory.categoryId}"/>
     <%@ include file="common/header.jsp" %>
 </div>
 
@@ -27,7 +27,7 @@
 	<div id="stage">
 		<div class="stage-title">
 			<span class="grey">Category: </span>
-			Here goes the title
+			<span>${currentCategory.title}</span>
 		</div>
 
         <%@ include file="home/demo-wish.jsp" %>

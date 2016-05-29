@@ -11,7 +11,9 @@
 <!-- Header: display of metainfo and logo. -->
 <div id="header">
     <c:set var="showHeaderContents" value="true"/>
-    <c:set var="headerRM" value="/workshop/rm-layout/${requestScope.layout.layoutId}"/>
+    <c:if test="${sessionScope.profile.defaultLayout ne requestScope.layout.layoutId}">
+        <c:set var="headerRM" value="/workshop/rm-layout/${requestScope.layout.layoutId}"/>
+    </c:if>
     <%@ include file="common/header.jsp" %>
 </div>
 
