@@ -1,6 +1,8 @@
 package com.ds.iwish.bean;
 
 
+import java.util.List;
+
 public class Wku {
 
     private long wkuId;
@@ -9,6 +11,11 @@ public class Wku {
     private String largeImageUrl;
     private String smallImageUrl;
     private String description;
+
+    private List<String> remotes;
+    private List<Category> categories;
+
+    private transient String priorityRaw;
 
 
     public long getWkuId() {
@@ -57,5 +64,31 @@ public class Wku {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+
+    public List<String> getRemotes() {
+        return remotes;
+    }
+
+    public void setRemotes(List<String> remotes) {
+        this.remotes = remotes;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+
+    public String getPriorityRaw() {
+        return priorityRaw;
+    }
+
+    public void setPriorityRaw(String priorityRaw) {
+        this.priorityRaw = priorityRaw;
     }
 }

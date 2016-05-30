@@ -37,7 +37,17 @@
 
     <div class="nav-block">
         <div class="nav-title">Your Giftlists:</div>
-        <div class="nav-empty-elm">No giftlists, yet</div>
+        <c:if test="${empty giftlists}" >
+            <div class="nav-empty-elm">No giftlists, yet</div>
+        </c:if>
+        <c:forEach var="giftlist" items="${giftlists}">
+            <a href="<c:url value="/catalog/view-giftlist/${giftlist.wishlistId}" />">
+                <div class="nav-empty-elm"
+                     style="background: #${giftlist.background}; color: #${giftlist.color}">
+                        ${giftlist.title}
+                </div>
+            </a>
+        </c:forEach>
         <a href="<c:url value="/catalog/add-giftlist" />">
             <button class="btn btn-success nav-btn">Add Giftlist</button>
         </a>

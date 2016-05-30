@@ -1,10 +1,12 @@
 package com.ds.iwish.controller;
 
 import com.ds.iwish.bean.Category;
+import com.ds.iwish.bean.Giftlist;
 import com.ds.iwish.bean.Profile;
 import com.ds.iwish.bean.Wishlist;
 import com.ds.iwish.helper.ProfileHelper;
 import com.ds.iwish.service.CategoryService;
+import com.ds.iwish.service.GiftlistService;
 import com.ds.iwish.service.WishlistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,7 @@ public class WishlistController {
 
     private WishlistService wishlistService;
     private CategoryService categoryService;
+    private GiftlistService giftlistService;
 
 
     @RequestMapping(value = "/catalog/view-wishlist/{wishlistId}", method = RequestMethod.GET)
@@ -33,6 +36,7 @@ public class WishlistController {
         ModelAndView modelAndView = new ModelAndView();
         populateExistingCategories(modelAndView);
         populateExistingWishlists(modelAndView);
+        populateExistingGiftlists(modelAndView);
         setupCurrentWishlist(modelAndView, wishlistId);
         modelAndView.setViewName("view-wishlist");
         return modelAndView;
@@ -48,6 +52,7 @@ public class WishlistController {
         ModelAndView modelAndView = new ModelAndView();
         populateExistingCategories(modelAndView);
         populateExistingWishlists(modelAndView);
+        populateExistingGiftlists(modelAndView);
         setupLayouts(modelAndView);
         modelAndView.setViewName(VIEW_NAME__ADD_WISHLIST);
 
@@ -64,6 +69,11 @@ public class WishlistController {
         modelAndView.addObject("wishlists", categories);
     }
 
+    private void populateExistingGiftlists(ModelAndView modelAndView) {
+        List<Giftlist> categories = getGiftlistService().getGiftlists();
+        modelAndView.addObject("giftlists", categories);
+    }
+
     private void setupLayouts(ModelAndView modelAndView) {
         modelAndView.addObject("layouts", getWishlistService().getLayouts());
     }
@@ -74,6 +84,7 @@ public class WishlistController {
         ModelAndView modelAndView = new ModelAndView();
         populateExistingCategories(modelAndView);
         populateExistingWishlists(modelAndView);
+        populateExistingGiftlists(modelAndView);
         setupLayouts(modelAndView);
         setupCurrentWishlist(modelAndView, wishlistId);
         Wishlist wishlistToEdit = getWishlistService().getWishlist(wishlistId);
@@ -95,6 +106,7 @@ public class WishlistController {
         } else {
             populateExistingCategories(modelAndView);
             populateExistingWishlists(modelAndView);
+            populateExistingGiftlists(modelAndView);
             setupLayouts(modelAndView);
             modelAndView.addObject(ATTR__ERROR_MESSAGE, errorMessage);
             modelAndView.setViewName(VIEW_NAME__ADD_WISHLIST);
@@ -123,6 +135,7 @@ public class WishlistController {
         } else {
             populateExistingCategories(modelAndView);
             populateExistingWishlists(modelAndView);
+            populateExistingGiftlists(modelAndView);
             setupLayouts(modelAndView);
             modelAndView.addObject("currentWishlist", wishlist);
             modelAndView.addObject(ATTR__ERROR_MESSAGE, errorMessage);
@@ -163,5 +176,14 @@ public class WishlistController {
     @Autowired
     public void setCategoryService(CategoryService categoryService) {
         this.categoryService = categoryService;
+    }
+
+    public GiftlistService getGiftlistService() {
+        return giftlistService;
+    }
+
+    @Autowired
+    public void setGiftlistService(GiftlistService giftlistService) {
+        this.giftlistService = giftlistService;
     }
 }

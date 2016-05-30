@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 
 <head>
@@ -9,7 +11,7 @@
 
 <div id="header">
 	<c:set var="showHeaderContents" value="true"/>
-	<c:set var="showHeaderEdit" value="true"/>
+	<c:set var="headerEdit" value="/catalog/edit-giftlist/${currentGiftlist.wishlistId}"/>
 	<%@ include file="common/header.jsp" %>
 </div>
 
@@ -18,7 +20,9 @@
 
 	<%@ include file="navigation/wish-navigation.jsp" %>
 
-	<button id="near-search-btn" class="btn btn-success">Add Wish</button>
+	<a href="<c:url value="/catalog/add-wku"/>" >
+		<button id="near-search-btn" class="btn btn-success">Add Wish</button>
+	</a>
 
 	<%@ include file="search/search-wish.jsp" %>
 

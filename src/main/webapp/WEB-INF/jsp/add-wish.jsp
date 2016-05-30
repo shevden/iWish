@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 
 <head>
@@ -24,7 +26,7 @@
 
         <%@ include file="search/search-wish.jsp" %>
 
-        <div id="stage">
+        <form id="stage" enctype="multipart/form-data">
 
             <div id="main-edit-block">
 
@@ -38,9 +40,16 @@
                     <input type="text" class="edit-priority-in"/>
                 </div>
 
-                <%-- TODO add one more button for small image !!! --%>
+
                 <div class="edit-color-btn-wrapper">
-                    <div class="edit-generic-wrapper-lt5">Images</div>
+                    <div class="edit-generic-wrapper-lt5">Big image</div>
+                    <button class="btn btn-success select-img-btn" style="margin-left: 45px;">Select</button>
+                </div>
+
+                <div class="loaded-image-name">Here the name of image will be placed.</div>
+
+                <div class="edit-color-btn-wrapper">
+                    <div class="edit-generic-wrapper-lt5">Small image</div>
                     <button class="btn btn-success select-img-btn">Select</button>
                 </div>
 
@@ -115,7 +124,7 @@
 
             </div>
 
-        </div>
+        </form>
 
     </div>
 

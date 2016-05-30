@@ -20,7 +20,9 @@
 
 	<%@ include file="navigation/wish-navigation.jsp" %>
 
-	<button id="near-search-btn" class="btn btn-success">Add Wish</button>
+	<a href="<c:url value="/catalog/add-wku"/>" >
+		<button id="near-search-btn" class="btn btn-success">Add Wish</button>
+	</a>
 
 	<%@ include file="search/search-wish.jsp" %>
 

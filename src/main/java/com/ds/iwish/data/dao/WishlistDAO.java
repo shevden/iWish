@@ -21,7 +21,7 @@ import java.util.List;
 public class WishlistDAO extends GenericDAO {
 
     public static final String SQL_SELECT_FROM_WISHLIST_BY_ID = "select * from wishlist where wishlist_id = ?";
-    public static final String SQL_SELECT_FROM_WISHLIST_BY_USER_ID = "select * from wishlist where user_id = ?";
+    public static final String SQL_SELECT_FROM_WISHLIST_BY_USER_ID = "select * from wishlist where user_id = ? and is_public is null";
     public static final String SQL_INSERT_INTO_WISHLIST = "insert into wishlist  (TITLE, PRIORITY, BACKGROUND, " +
             "COLOR, LAYOUT_ID, USER_ID) values(?, ?, ?, ?, ?, ?)";
     public static final String SQL_UPDATE_WISHLIST_BY_ID = "update wishlist set TITLE = ?, PRIORITY = ?, BACKGROUND = ?, " +
@@ -79,6 +79,10 @@ public class WishlistDAO extends GenericDAO {
         return true;
     }
 
+
+    protected JdbcTemplate getJdbcTemplate() {
+        return mJdbcTemplate;
+    }
 
     @Autowired
     public void setDataSource(DataSource dataSource) {

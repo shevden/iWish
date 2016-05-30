@@ -19,21 +19,21 @@
 <div id="content">
 
     <%-- Special navigation for friends management --%>
-        <div id="navigation">
-            <c:if test="${pendingAction ne null}">
-                <div class="white-dashed-bottom nav-block" style="margin-bottom: 30px;">
-                    <div class="nav-title">Pending Approve:</div>
-                    <c:forEach var="profile" items="${pendingAction}">
-                        <div class="nav-empty-elm">${profile.firstName} ${profile.lastName}</div>
-                        <a href="<c:url value="/user/friends/approve/${profile.id}" />" class="clean-link">
-                            <button class="btn btn-success half-to-left">Approve</button>
-                        </a>
-                        <a href="<c:url value="/user/friends/reject/${profile.id}" />" class="clean-link">
-                            <button class="btn btn-danger half-to-left">Reject</button>
-                        </a>
-                    </c:forEach>
-                </div>
-            </c:if>
+    <div id="navigation">
+        <c:if test="${pendingAction ne null}">
+            <div class="white-dashed-bottom nav-block" style="margin-bottom: 30px;">
+                <div class="nav-title">Pending Approve:</div>
+                <c:forEach var="profile" items="${pendingAction}">
+                    <div class="nav-empty-elm">${profile.firstName} ${profile.lastName}</div>
+                    <a href="<c:url value="/user/friends/approve/${profile.id}" />" class="clean-link">
+                        <button class="btn btn-success half-to-left">Approve</button>
+                    </a>
+                    <a href="<c:url value="/user/friends/reject/${profile.id}" />" class="clean-link">
+                        <button class="btn btn-danger half-to-left">Reject</button>
+                    </a>
+                </c:forEach>
+            </div>
+        </c:if>
         <div class="nav-block">
             <div class="nav-title">Friends:</div>
             <c:if test="${friends eq null}">
@@ -46,7 +46,11 @@
                     </a>
                 </c:forEach>
             </c:if>
-            <%--<button class="btn btn-success nav-btn">Giftlist 1</button>--%>
+            <c:forEach var="giftlist" items="${giftlists}">
+                <a href="<c:url value="/user/friends/${currentFriend.id}/${giftlist.wishlistId}" />">
+                    <button class="btn btn-success nav-btn">${giftlist.title}</button>
+                </a>
+            </c:forEach>
         </div>
     </div>
 
@@ -63,9 +67,9 @@
         </c:if>
 
         <div id="friends-search-results"
-            <c:if test="${searchResults eq null}">
-                hidden="hidden"
-            </c:if>
+                <c:if test="${searchResults eq null}">
+                    hidden="hidden"
+                </c:if>
         >
             <h3>Search results:</h3>
             <c:forEach var="user" items="${searchResults}">
@@ -81,10 +85,12 @@
         <c:if test="${searchResults eq null and emptyResult eq null and currentFriend ne null}">
             <div class="stage-title">
                 <span class="grey">Friend: </span>
-                ${currentFriend.firstName} ${currentFriend.lastName}
+                    ${currentFriend.firstName} ${currentFriend.lastName}
 
-                <span class="grey">Giftlist: </span>
-                Giftlist 1
+                <c:if test="${currentGiftlist ne null}">
+                    <span class="grey">Giftlist: </span>
+                    ${currentGiftlist.title}
+                </c:if>
             </div>
         </c:if>
     </div>

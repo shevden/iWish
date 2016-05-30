@@ -1,8 +1,10 @@
 package com.ds.iwish.controller;
 
+import com.ds.iwish.bean.Giftlist;
 import com.ds.iwish.bean.Profile;
 import com.ds.iwish.helper.ProfileHelper;
 import com.ds.iwish.service.FriendsService;
+import com.ds.iwish.service.GiftlistService;
 import com.ds.iwish.service.ProfileService;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.commons.lang3.StringUtils;
@@ -25,6 +27,7 @@ public class FriendsController {
 
     private FriendsService friendsService;
     private ProfileService profileService;
+    private GiftlistService giftlistService;
 
 
     @RequestMapping(value = "/user/friends", method = RequestMethod.GET)
@@ -46,6 +49,19 @@ public class FriendsController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/user/friends/{profileId}/{giftlistId}", method = RequestMethod.GET)
+    public ModelAndView getFriendGiftlist(@PathVariable("profileId") long profileId,
+                                          @PathVariable("giftlistId") long giftlistId) {
+        ModelAndView modelAndView = new ModelAndView();
+        setupPendingAction(modelAndView);
+        setupCurrentFriend(modelAndView, profileId);
+        setupCurrentGiftlist(modelAndView, giftlistId);
+        setupFriends(modelAndView);
+        modelAndView.setViewName(VIEW_NAME__FRIENDS);
+        return modelAndView;
+    }
+
+
     private void setupPendingAction(ModelAndView modelAndView) {
         List<Profile> pendingAction = getFriendsService().getPendingAction();
         if(!pendingAction.isEmpty()) {
@@ -56,6 +72,13 @@ public class FriendsController {
     private void setupCurrentFriend(ModelAndView modelAndView, long friendId) {
         Profile profile = getProfileService().getProfile(friendId);
         modelAndView.addObject("currentFriend", profile);
+        List<Giftlist> giftlists = getGiftlistService().getGiftlists(profile.getId());
+        modelAndView.addObject("giftlists", giftlists);
+    }
+
+    private void setupCurrentGiftlist(ModelAndView modelAndView, long giftlistId) {
+        Giftlist giftlist = getGiftlistService().getGiftlist(giftlistId);
+        modelAndView.addObject("currentGiftlist", giftlist);
     }
 
     private void setupFriends(ModelAndView modelAndView) {
@@ -131,5 +154,14 @@ public class FriendsController {
     @Autowired
     public void setProfileService(ProfileService profileService) {
         this.profileService = profileService;
+    }
+
+    public GiftlistService getGiftlistService() {
+        return giftlistService;
+    }
+
+    @Autowired
+    public void setGiftlistService(GiftlistService giftlistService) {
+        this.giftlistService = giftlistService;
     }
 }

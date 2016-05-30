@@ -1,7 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div id="header-title">iWish</div>
-<div id="header-subtitle">Driven by the wishflow &nbsp; :::::::::::: &nbsp; Powered by the dreams</div>
+<div id="header-title">
+    <span>iWish</span>
+</div>
+<c:if test="${not empty sessionScope.profile}">
+    <a href="<c:url value="/catalog/view-category/${sessionScope.profile.defaultCategory}" />">
+        <div id="header-subtitle">Driven by the wishflow &nbsp; :::::::::::: &nbsp; Powered by the dreams</div>
+    </a>
+</c:if>
 
 <c:if test="${showHeaderContents}">
 
