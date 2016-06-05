@@ -1,6 +1,7 @@
 package com.ds.iwish.bean;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Wku {
@@ -11,11 +12,20 @@ public class Wku {
     private String largeImageUrl;
     private String smallImageUrl;
     private String description;
+    private long templateId;
+    private long wishlistId;
+    private long giftlistId;
 
-    private List<String> remotes;
+    private List<Remote> remotes;
     private List<Category> categories;
 
     private transient String priorityRaw;
+
+
+    public Wku() {
+        remotes = new ArrayList<>();
+        categories = new ArrayList<>();
+    }
 
 
     public long getWkuId() {
@@ -66,12 +76,35 @@ public class Wku {
         this.description = description;
     }
 
+    public long getTemplateId() {
+        return templateId;
+    }
 
-    public List<String> getRemotes() {
+    public void setTemplateId(long templateId) {
+        this.templateId = templateId;
+    }
+
+    public long getWishlistId() {
+        return wishlistId;
+    }
+
+    public void setWishlistId(long wishlistId) {
+        this.wishlistId = wishlistId;
+    }
+
+    public long getGiftlistId() {
+        return giftlistId;
+    }
+
+    public void setGiftlistId(long giftlistId) {
+        this.giftlistId = giftlistId;
+    }
+
+    public List<Remote> getRemotes() {
         return remotes;
     }
 
-    public void setRemotes(List<String> remotes) {
+    public void setRemotes(List<Remote> remotes) {
         this.remotes = remotes;
     }
 

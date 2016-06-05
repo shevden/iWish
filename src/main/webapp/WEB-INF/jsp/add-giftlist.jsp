@@ -120,7 +120,8 @@
         var rmButton = document.createElement('button');
         rmButton.className = "btn btn-warning btns-remove";
         rmButton.innerHTML = "Remove";
-        rmButton.onclick = "rmDiv(" + option.value +")";
+        rmButton.type = "button";
+        rmButton.onclick = function() {rmDiv(option.value)};
         var textDiv = document.createElement('div');
         textDiv.className = "btns-remove-label";
         textDiv.id = "l-" + option.value;
@@ -134,9 +135,11 @@
         wrapperDiv.appendChild(textDiv);
         wrapperDiv.appendChild(hiddenIn);
 
-        parentGuest.parentNode.appendChild(wrapperDiv);
+        parentGuest.appendChild(wrapperDiv);
 
         option.parentNode.removeChild(option);
+
+        document.getElementById("disabled-option").selected = "selected";
     }
 
     function rmDiv(friendId) {

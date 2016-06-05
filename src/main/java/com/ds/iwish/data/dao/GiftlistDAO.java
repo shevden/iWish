@@ -27,6 +27,7 @@ public class GiftlistDAO {
     public static final String SQL_INSERT_INTO_WISHLIST = "insert into wishlist  (TITLE, PRIORITY, BACKGROUND, " +
             "COLOR, LAYOUT_ID, USER_ID, IS_PUBLIC) values(?, ?, ?, ?, ?, ?, ?)";
     public static final String SQL_SELECT_USER_FROM_GIFTLIST = "select friend_id from giftlist where wishlist_id = ?";
+
     public static final String SQL_INSERT_INTO_GIFTLIST = "insert into giftlist (wishlist_id, friend_id) values (?, ?)";
     public static final String SQL_DELETE_FROM_GIFTLIST = "delete from giftlist where wishlist_id = ?";
 

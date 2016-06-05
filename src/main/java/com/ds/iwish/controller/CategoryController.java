@@ -4,6 +4,7 @@ import com.ds.iwish.bean.Category;
 import com.ds.iwish.bean.Giftlist;
 import com.ds.iwish.bean.Profile;
 import com.ds.iwish.bean.Wishlist;
+import com.ds.iwish.controller.common.NavigationController;
 import com.ds.iwish.helper.ProfileHelper;
 import com.ds.iwish.service.CategoryService;
 import com.ds.iwish.service.GiftlistService;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-public class CategoryController {
+public class CategoryController extends NavigationController {
 
     public static final String VIEW_NAME__ADD_CATEGORY = "add-category";
     public static final String VIEW_NAME__EDIT_CATEGORY = "edit-category";
@@ -34,9 +35,7 @@ public class CategoryController {
     @RequestMapping(value = "/catalog/view-category/{categoryId}", method = RequestMethod.GET)
     public ModelAndView getCategory(@PathVariable("categoryId") long categoryId) {
         ModelAndView modelAndView = new ModelAndView();
-        populateExistingCategories(modelAndView);
-        populateExistingWishlists(modelAndView);
-        populateExistingGiftlists(modelAndView);
+        populateNavigationModel(modelAndView);
         setupCurrentCategory(modelAndView, categoryId);
         modelAndView.setViewName("view-category");
         return modelAndView;
@@ -50,28 +49,11 @@ public class CategoryController {
     @RequestMapping(value = "/catalog/add-category", method = RequestMethod.GET)
     public ModelAndView getAddCategory() {
         ModelAndView modelAndView = new ModelAndView();
-        populateExistingCategories(modelAndView);
-        populateExistingWishlists(modelAndView);
-        populateExistingGiftlists(modelAndView);
+        populateNavigationModel(modelAndView);
         setupLayouts(modelAndView);
         modelAndView.setViewName(VIEW_NAME__ADD_CATEGORY);
 
         return modelAndView;
-    }
-
-    private void populateExistingCategories(ModelAndView modelAndView) {
-        List<Category> categories = getCategoryService().getCategories();
-        modelAndView.addObject("categories", categories);
-    }
-
-    private void populateExistingWishlists(ModelAndView modelAndView) {
-        List<Wishlist> categories = getWishlistService().getWishlists();
-        modelAndView.addObject("wishlists", categories);
-    }
-
-    private void populateExistingGiftlists(ModelAndView modelAndView) {
-        List<Giftlist> categories = getGiftlistService().getGiftlists();
-        modelAndView.addObject("giftlists", categories);
     }
 
     private void setupLayouts(ModelAndView modelAndView) {
@@ -82,9 +64,7 @@ public class CategoryController {
     @RequestMapping(value = "/catalog/edit-category/{categoryId}", method = RequestMethod.GET)
     public ModelAndView getEditCategory(@PathVariable("categoryId") long categoryId, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        populateExistingCategories(modelAndView);
-        populateExistingWishlists(modelAndView);
-        populateExistingGiftlists(modelAndView);
+        populateNavigationModel(modelAndView);
         setupLayouts(modelAndView);
         setupCurrentCategory(modelAndView, categoryId);
         Category categoryToEdit = getCategoryService().getCategory(categoryId);
@@ -104,9 +84,7 @@ public class CategoryController {
         if (errorMessage == null) {
             modelAndView.setViewName("redirect:/catalog/edit-category/" + newCategory.getCategoryId());
         } else {
-            populateExistingCategories(modelAndView);
-            populateExistingWishlists(modelAndView);
-            populateExistingGiftlists(modelAndView);
+            populateNavigationModel(modelAndView);
             setupLayouts(modelAndView);
             modelAndView.addObject(ATTR__ERROR_MESSAGE, errorMessage);
             modelAndView.setViewName(VIEW_NAME__ADD_CATEGORY);
@@ -133,9 +111,7 @@ public class CategoryController {
         if (errorMessage == null) {
             modelAndView.setViewName("redirect:/catalog/view-category/" + category.getCategoryId());
         } else {
-            populateExistingCategories(modelAndView);
-            populateExistingWishlists(modelAndView);
-            populateExistingGiftlists(modelAndView);
+            populateNavigationModel(modelAndView);
             setupLayouts(modelAndView);
             modelAndView.addObject("currentCategory", category);
             modelAndView.addObject(ATTR__ERROR_MESSAGE, errorMessage);

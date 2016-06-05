@@ -4,6 +4,7 @@ import com.ds.iwish.bean.Category;
 import com.ds.iwish.bean.Profile;
 import com.ds.iwish.bean.Giftlist;
 import com.ds.iwish.bean.Wishlist;
+import com.ds.iwish.controller.common.NavigationController;
 import com.ds.iwish.helper.ProfileHelper;
 import com.ds.iwish.service.CategoryService;
 import com.ds.iwish.service.GiftlistService;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-public class GiftlistController {
+public class GiftlistController extends NavigationController {
 
     public static final String VIEW_NAME__ADD_GIFTLIST = "add-giftlist";
     public static final String VIEW_NAME__EDIT_GIFTLIST = "edit-giftlist";
@@ -34,9 +35,7 @@ public class GiftlistController {
     @RequestMapping(value = "/catalog/view-giftlist/{giftlistId}", method = RequestMethod.GET)
     public ModelAndView getGiftlist(@PathVariable("giftlistId") long giftlistId) {
         ModelAndView modelAndView = new ModelAndView();
-        populateExistingCategories(modelAndView);
-        populateExistingWishlists(modelAndView);
-        populateExistingGiftlists(modelAndView);
+        populateNavigationModel(modelAndView);
         setupCurrentGiftlist(modelAndView, giftlistId);
         modelAndView.setViewName("view-giftlist");
         return modelAndView;
@@ -51,29 +50,12 @@ public class GiftlistController {
     @RequestMapping(value = "/catalog/add-giftlist", method = RequestMethod.GET)
     public ModelAndView getAddGiftlist() {
         ModelAndView modelAndView = new ModelAndView();
-        populateExistingCategories(modelAndView);
-        populateExistingWishlists(modelAndView);
-        populateExistingGiftlists(modelAndView);
+        populateNavigationModel(modelAndView);
         setupLayouts(modelAndView);
         setupFriends(modelAndView);
         modelAndView.setViewName(VIEW_NAME__ADD_GIFTLIST);
 
         return modelAndView;
-    }
-
-    private void populateExistingCategories(ModelAndView modelAndView) {
-        List<Category> categories = getCategoryService().getCategories();
-        modelAndView.addObject("categories", categories);
-    }
-
-    private void populateExistingWishlists(ModelAndView modelAndView) {
-        List<Wishlist> categories = getWishlistService().getWishlists();
-        modelAndView.addObject("wishlists", categories);
-    }
-
-    private void populateExistingGiftlists(ModelAndView modelAndView) {
-        List<Giftlist> categories = getGiftlistService().getGiftlists();
-        modelAndView.addObject("giftlists", categories);
     }
 
     private void setupLayouts(ModelAndView modelAndView) {
@@ -88,9 +70,7 @@ public class GiftlistController {
     @RequestMapping(value = "/catalog/edit-giftlist/{giftlistId}", method = RequestMethod.GET)
     public ModelAndView getEditGiftlist(@PathVariable("giftlistId") long giftlistId, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        populateExistingCategories(modelAndView);
-        populateExistingWishlists(modelAndView);
-        populateExistingGiftlists(modelAndView);
+        populateNavigationModel(modelAndView);
         setupLayouts(modelAndView);
         Giftlist giftlist = setupCurrentGiftlist(modelAndView, giftlistId);
         setupFriendsForEdit(modelAndView, giftlist);
@@ -115,9 +95,7 @@ public class GiftlistController {
         if (errorMessage == null) {
             modelAndView.setViewName("redirect:/catalog/edit-giftlist/" + newGiftlist.getWishlistId());
         } else {
-            populateExistingCategories(modelAndView);
-            populateExistingWishlists(modelAndView);
-            populateExistingGiftlists(modelAndView);
+            populateNavigationModel(modelAndView);
             setupLayouts(modelAndView);
             setupFriends(modelAndView);
             modelAndView.addObject(ATTR__ERROR_MESSAGE, errorMessage);
@@ -157,9 +135,7 @@ public class GiftlistController {
         if (errorMessage == null) {
             modelAndView.setViewName("redirect:/catalog/view-giftlist/" + giftlist.getWishlistId());
         } else {
-            populateExistingCategories(modelAndView);
-            populateExistingWishlists(modelAndView);
-            populateExistingGiftlists(modelAndView);
+            populateNavigationModel(modelAndView);
             setupLayouts(modelAndView);
             setupFriends(modelAndView);
             modelAndView.addObject("currentGiftlist", giftlist);
