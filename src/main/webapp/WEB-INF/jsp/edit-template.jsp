@@ -29,6 +29,10 @@
 
             <div class="error-message">${requestScope.errorMessage}</div>
 
+            <c:if test="${param.success eq '1'}">
+                <div class="success-message-ws">The template is successfully saved</div>
+            </c:if>
+
             <button id="main-workshop-btn" class="btn btn-success" onclick="postEditForm();">Save</button>
 
             <div id="main-edit-block">

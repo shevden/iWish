@@ -119,7 +119,8 @@ public class TemplateController {
         setupNewTemplate(newTemplate, request);
         String errorMessage = getTemplateService().createTemplate(newTemplate);
         if (errorMessage == null) {
-            modelAndView.setViewName("redirect:/workshop/edit-template/" + newTemplate.getTemplateId());
+            modelAndView.setViewName("redirect:/workshop/edit-template/"
+                    + newTemplate.getTemplateId() + "?success=1");
         } else {
             populateExistingTemplates(modelAndView);
             setupSelectsTypes(request);
@@ -155,7 +156,8 @@ public class TemplateController {
         setupExistingTemplate(template, request);
         String errorMessage = getTemplateService().updateTemplate(template);
         if (errorMessage == null) {
-            modelAndView.setViewName("redirect:/workshop/edit-template/" + template.getTemplateId());
+            modelAndView.setViewName("redirect:/workshop/edit-template/"
+                    + template.getTemplateId() + "?success=1");
         } else {
             populateExistingTemplates(modelAndView);
             setupSelectsTypes(request);

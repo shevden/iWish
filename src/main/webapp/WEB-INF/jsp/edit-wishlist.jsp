@@ -30,6 +30,10 @@
 
             <div class="error-message">${errorMessage}</div>
 
+            <c:if test="${param.success eq '1'}">
+                <div class="success-message">The wishlist is successfully saved</div>
+            </c:if>
+
             <div id="main-edit-block">
 
                 <input type="hidden" name="wishlistId" value="${currentWishlist.wishlistId}"/>

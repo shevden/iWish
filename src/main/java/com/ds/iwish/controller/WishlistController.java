@@ -1,10 +1,8 @@
 package com.ds.iwish.controller;
 
-import com.ds.iwish.bean.Category;
-import com.ds.iwish.bean.Giftlist;
 import com.ds.iwish.bean.Profile;
 import com.ds.iwish.bean.Wishlist;
-import com.ds.iwish.controller.common.NavigationController;
+import com.ds.iwish.controller.common.SupportController;
 import com.ds.iwish.helper.ProfileHelper;
 import com.ds.iwish.service.CategoryService;
 import com.ds.iwish.service.GiftlistService;
@@ -17,10 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Controller
-public class WishlistController extends NavigationController {
+public class WishlistController extends SupportController {
 
     public static final String VIEW_NAME__ADD_WISHLIST = "add-wishlist";
     public static final String VIEW_NAME__EDIT_WISHLIST = "edit-wishlist";
@@ -82,7 +79,8 @@ public class WishlistController extends NavigationController {
         setupNewWishlist(newWishlist, request);
         String errorMessage = getWishlistService().createWishlist(newWishlist);
         if (errorMessage == null) {
-            modelAndView.setViewName("redirect:/catalog/edit-wishlist/" + newWishlist.getWishlistId());
+            modelAndView.setViewName("redirect:/catalog/edit-wishlist/"
+                    + newWishlist.getWishlistId() + "?success=1");
         } else {
             populateNavigationModel(modelAndView);
             setupLayouts(modelAndView);

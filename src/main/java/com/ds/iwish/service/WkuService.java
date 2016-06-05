@@ -38,7 +38,7 @@ public class WkuService {
         return wkus == null ? Collections.emptyList() : wkus;
     }
 
-    public List<Wku> getWkusByWiishlist(long wishlistId){
+    public List<Wku> getWkusByWishlist(long wishlistId){
         List<Wku> wkus = getWkuRepository().getWkusByWishlist(wishlistId);
         return wkus == null ? Collections.emptyList() : wkus;
     }

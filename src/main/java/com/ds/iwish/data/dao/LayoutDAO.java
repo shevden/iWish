@@ -23,8 +23,8 @@ public class LayoutDAO extends GenericDAO {
     public static final String SQL_SELECT_FROM_LAYOUT_BY_USER_ID = "select * from layout where user_id = ?";
     public static final String SQL_INSERT_INTO_LAYOUT = "insert into layout  (TITLE, MODEL, HEIGHT, WIDTH, " +
             "PADDING, MARGIN, USER_ID) values(?, ?, ?, ?, ?, ?, ?)";
-    public static final String SQL_UPDATE_LAYOUT_BY_ID = "update layout set TITLE = ?, MODEL = ?, HEIGHT = ?, " +
-            "WIDTH = ?, PADDING = ?, MARGIN = ?, USER_ID = ? where layout_id = ?";
+    public static final String SQL_UPDATE_LAYOUT_BY_ID = "update layout set TITLE = ?, MODEL = ?,  " +
+            "WIDTH = ?, HEIGHT = ?, PADDING = ?, MARGIN = ?, USER_ID = ? where layout_id = ?";
     public static final String SQL_DELETE_FROM_LAYOUT_BY_ID = "delete from layout where layout_id = ?";
 
 
@@ -68,7 +68,7 @@ public class LayoutDAO extends GenericDAO {
                 layout.getWidth(),
                 layout.getHeight(),
                 layout.getPadding(),
-                layout.getPadding(),
+                layout.getMargin(),
                 layout.getUserId(),
                 layout.getLayoutId()
         );

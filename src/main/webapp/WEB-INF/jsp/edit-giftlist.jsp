@@ -30,6 +30,10 @@
 
             <div class="error-message">${requestScope.errorMessage}</div>
 
+            <c:if test="${param.success eq '1'}">
+                <div class="success-message">The giftlist is successfully saved</div>
+            </c:if>
+
             <div id="main-edit-block">
 
                 <input type="hidden" name="giftlistId" value="${currentGiftlist.wishlistId}"/>

@@ -1,10 +1,8 @@
 package com.ds.iwish.controller;
 
 import com.ds.iwish.bean.Category;
-import com.ds.iwish.bean.Giftlist;
 import com.ds.iwish.bean.Profile;
-import com.ds.iwish.bean.Wishlist;
-import com.ds.iwish.controller.common.NavigationController;
+import com.ds.iwish.controller.common.SupportController;
 import com.ds.iwish.helper.ProfileHelper;
 import com.ds.iwish.service.CategoryService;
 import com.ds.iwish.service.GiftlistService;
@@ -17,10 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Controller
-public class CategoryController extends NavigationController {
+public class CategoryController extends SupportController {
 
     public static final String VIEW_NAME__ADD_CATEGORY = "add-category";
     public static final String VIEW_NAME__EDIT_CATEGORY = "edit-category";
@@ -36,12 +33,13 @@ public class CategoryController extends NavigationController {
     public ModelAndView getCategory(@PathVariable("categoryId") long categoryId) {
         ModelAndView modelAndView = new ModelAndView();
         populateNavigationModel(modelAndView);
-        setupCurrentCategory(modelAndView, categoryId);
+        populateCurrentCategory(modelAndView, categoryId);
+        populateContent(modelAndView);
         modelAndView.setViewName("view-category");
         return modelAndView;
     }
 
-    private void setupCurrentCategory(ModelAndView modelAndView, long categoryId){
+    private void populateCurrentCategory(ModelAndView modelAndView, long categoryId){
         Category category = getCategoryService().getCategory(categoryId);
         modelAndView.addObject("currentCategory", category);
     }
@@ -66,7 +64,7 @@ public class CategoryController extends NavigationController {
         ModelAndView modelAndView = new ModelAndView();
         populateNavigationModel(modelAndView);
         setupLayouts(modelAndView);
-        setupCurrentCategory(modelAndView, categoryId);
+        populateCurrentCategory(modelAndView, categoryId);
         Category categoryToEdit = getCategoryService().getCategory(categoryId);
         request.setAttribute("category", categoryToEdit);
         modelAndView.setViewName(VIEW_NAME__EDIT_CATEGORY);
@@ -82,7 +80,8 @@ public class CategoryController extends NavigationController {
         setupNewCategory(newCategory, request);
         String errorMessage = getCategoryService().createCategory(newCategory);
         if (errorMessage == null) {
-            modelAndView.setViewName("redirect:/catalog/edit-category/" + newCategory.getCategoryId());
+            modelAndView.setViewName("redirect:/catalog/edit-category/"
+                    + newCategory.getCategoryId() + "?success=1");
         } else {
             populateNavigationModel(modelAndView);
             setupLayouts(modelAndView);

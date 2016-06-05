@@ -3,7 +3,7 @@ package com.ds.iwish.controller;
 import com.ds.iwish.bean.Category;
 import com.ds.iwish.bean.Remote;
 import com.ds.iwish.bean.Wku;
-import com.ds.iwish.controller.common.NavigationController;
+import com.ds.iwish.controller.common.SupportController;
 import com.ds.iwish.helper.ImageHelper;
 import com.ds.iwish.helper.WebHelper;
 import com.ds.iwish.service.TemplateService;
@@ -18,14 +18,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.Part;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
 
 @Controller
-public class WkuController extends NavigationController {
+public class WkuController extends SupportController {
 
     public static final String ATTR__ERROR_MESSAGE = "errorMessage";
 

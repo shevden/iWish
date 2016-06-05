@@ -19,6 +19,7 @@ public class Wku {
     private List<Remote> remotes;
     private List<Category> categories;
 
+    private transient Template template;
     private transient String priorityRaw;
 
 
@@ -116,6 +117,14 @@ public class Wku {
         this.categories = categories;
     }
 
+
+    public Template getTemplate() {
+        return template;
+    }
+
+    public void setTemplate(Template template) {
+        this.template = template;
+    }
 
     public String getPriorityRaw() {
         return priorityRaw;

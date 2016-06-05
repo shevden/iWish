@@ -19,6 +19,39 @@ public class Template {
     private long userId;
 
 
+    public String getMainColorDP() {
+        return "#" + getMainColor();
+    }
+
+    public String getTitleColorDP() {
+        return "#" + getTitleColor();
+    }
+
+    public String getTextColorDP() {
+        return "#" + getTextColor();
+    }
+
+    public String getBorderColorDP() {
+        return "#" + getBorderColor();
+    }
+
+    public String getTitleBoldDP(){
+        return getTitleStyle().contains("Bold") ? "bold" : "";
+    }
+
+    public String getTextBoldDP(){
+        return getTextStyle().contains("Bold") ? "bold" : "";
+    }
+
+    public String getTitleItalicDP(){
+        return getTitleStyle().contains("Italic") ? "italic" : "";
+    }
+
+    public String getTextItalicDP(){
+        return getTitleStyle().contains("Italic") ? "italic" : "";
+    }
+
+
     public long getTemplateId() {
         return templateId;
     }

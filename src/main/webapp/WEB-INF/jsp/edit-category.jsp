@@ -32,6 +32,10 @@
 
             <div class="error-message">${requestScope.errorMessage}</div>
 
+            <c:if test="${param.success eq '1'}">
+                <div class="success-message">The category is successfully saved</div>
+            </c:if>
+
             <div id="main-edit-block">
 
                 <input type="hidden" name="categoryId" value="${currentCategory.categoryId}"/>

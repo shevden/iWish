@@ -32,7 +32,7 @@ public class WkuRepository {
     }
 
     public List<Wku> getWkusByGiftlist(long giftlistId) {
-        return getWkuDAO().getWkusByGiftlist(giftlistId);
+        return getWkuDAO().getWkusByWishlist(giftlistId);
     }
 
     public List<Wku> getWkusByKeyword(String keyword) {

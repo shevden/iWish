@@ -1,10 +1,8 @@
 package com.ds.iwish.controller;
 
-import com.ds.iwish.bean.Category;
 import com.ds.iwish.bean.Profile;
 import com.ds.iwish.bean.Giftlist;
-import com.ds.iwish.bean.Wishlist;
-import com.ds.iwish.controller.common.NavigationController;
+import com.ds.iwish.controller.common.SupportController;
 import com.ds.iwish.helper.ProfileHelper;
 import com.ds.iwish.service.CategoryService;
 import com.ds.iwish.service.GiftlistService;
@@ -20,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-public class GiftlistController extends NavigationController {
+public class GiftlistController extends SupportController {
 
     public static final String VIEW_NAME__ADD_GIFTLIST = "add-giftlist";
     public static final String VIEW_NAME__EDIT_GIFTLIST = "edit-giftlist";
@@ -93,7 +91,8 @@ public class GiftlistController extends NavigationController {
         setupNewGiftlist(newGiftlist, request);
         String errorMessage = getGiftlistService().createGiftlist(newGiftlist);
         if (errorMessage == null) {
-            modelAndView.setViewName("redirect:/catalog/edit-giftlist/" + newGiftlist.getWishlistId());
+            modelAndView.setViewName("redirect:/catalog/edit-giftlist/"
+                    + newGiftlist.getWishlistId() + "?success=1");
         } else {
             populateNavigationModel(modelAndView);
             setupLayouts(modelAndView);

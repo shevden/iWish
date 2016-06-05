@@ -24,8 +24,7 @@ public class LayoutController {
 
     private static final String[] MODELS = {
             "Grid",
-            "List",
-            "Pair"
+            "List"
     };
 
 
@@ -71,7 +70,8 @@ public class LayoutController {
         setupNewLayout(newLayout, request);
         String errorMessage = getLayoutService().createLayout(newLayout);
         if (errorMessage == null) {
-            modelAndView.setViewName("redirect:/workshop/edit-layout/" + newLayout.getLayoutId());
+            modelAndView.setViewName("redirect:/workshop/edit-layout/"
+                    + newLayout.getLayoutId() + "?success=1");
         } else {
             populateExistingLayouts(modelAndView);
             setupSelectsTypes(request);
@@ -99,7 +99,8 @@ public class LayoutController {
         setupExistingLayout(layout, request);
         String errorMessage = getLayoutService().updateLayout(layout);
         if (errorMessage == null) {
-            modelAndView.setViewName("redirect:/workshop/edit-layout/" + layout.getLayoutId());
+            modelAndView.setViewName("redirect:/workshop/edit-layout/"
+                    + layout.getLayoutId() + "?success=1");
         } else {
             populateExistingLayouts(modelAndView);
             setupSelectsTypes(request);

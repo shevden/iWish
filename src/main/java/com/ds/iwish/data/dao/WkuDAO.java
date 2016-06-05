@@ -22,9 +22,9 @@ import java.util.List;
 public class WkuDAO extends GenericDAO {
 
     public static final String SQL_SELECT_FROM_WKU_BY_ID = "select * from wku where wku_id = ?";
-    public static final String SQL_SELECT_FROM_WKU_BY_CATEGORY = "select * from wku where category_id = ? order by priority";
+    public static final String SQL_SELECT_FROM_WKU_BY_CATEGORY = "select * from wku where wku_id in " +
+            "(select wku_id from wku_category where category_id = ?) order by priority";
     public static final String SQL_SELECT_FROM_WKU_BY_WISHLIST = "select * from wku where wishlist_id = ? order by priority";
-    public static final String SQL_SELECT_FROM_WKU_BY_GIFTLIST = "select * from wku where giftlist_id = ? order by priority";
     public static final String SQL_SELECT_FROM_WKU_BY_TITLE = "select * from wku where title like ? order by priority";
 
     public static final String SQL_INSERT_INTO_WKU = "insert into wku  (TITLE, PRIORITY, LARGE_IMAGE_URL, " +
@@ -57,11 +57,6 @@ public class WkuDAO extends GenericDAO {
 
     public List<Wku> getWkusByWishlist(long wishlistId) {
         return mJdbcTemplate.query(SQL_SELECT_FROM_WKU_BY_WISHLIST, new Object[]{wishlistId},
-                new WkuRowMapper());
-    }
-
-    public List<Wku> getWkusByGiftlist(long giftlistId) {
-        return mJdbcTemplate.query(SQL_SELECT_FROM_WKU_BY_GIFTLIST, new Object[]{giftlistId},
                 new WkuRowMapper());
     }
 
