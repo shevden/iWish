@@ -20,10 +20,12 @@ public class GiftlistRepository {
 
 
     public Giftlist getGiftlistById(long pGiftlistId) {
+        LOG.info("Inside #getGiftlistById : (pGiftlist = {})", pGiftlistId);
         return getGiftlistDAO().getGiftlistById(pGiftlistId);
     }
 
     public List<Giftlist> getGiftlistsByUserId(long pUserId) {
+        LOG.info("Inside #getGiftlistsByUserId : (pGiftlist = {})", pUserId);
         return getGiftlistDAO().getGiftlistsByUserId(pUserId);
     }
 
@@ -35,10 +37,12 @@ public class GiftlistRepository {
     }
 
     public Giftlist updateGiftlist(Giftlist pGiftlist) {
+        LOG.info("Inside #updateGiftlist : (pGiftlist = {})", pGiftlist);
         return getGiftlistDAO().updateGiftlist(pGiftlist);
     }
 
     public boolean deleteGiftlist(long pGiftlistId) {
+        LOG.info("Inside #deleteGiftlist : (pGiftlist = {})", pGiftlistId);
         return getGiftlistDAO().deleteGiftlist(pGiftlistId);
     }
 

@@ -26,17 +26,19 @@ public class UserRepository {
 
 
     public Profile getUserById(long pId){
+        LOG.info("Inside #getUserById : (pId = {})", pId);
         return getUserDAO().getUserById(pId);
     }
 
     public Profile getUserByEmail(String pEmail){
         LOG.info("Inside #getUserByEmail : (pEmail = {})", pEmail);
         Profile Profile = getUserDAO().getUserByEmail(pEmail);
-        LOG.info("Leaving #getUserByEmail : (Profile = {})", Profile);
+        LOG.info("Leaving #getUserByEmail : (profile = {})", Profile);
         return Profile;
     }
 
     public List<Profile> getUsersByKeyword(String keyword){
+        LOG.info("Inside #getUsersByKeyword : (keyword = {})", keyword);
         String [] names = keyword.split(" ");
         String firstName = names[0];
         String lastName;
@@ -50,33 +52,39 @@ public class UserRepository {
     }
 
     public void addFriend(long userId, long otherUserId) {
+        LOG.info("Inside #addFriend : (userId = {})", userId);
         getUserDAO().createFriendship(userId, otherUserId);
     }
 
     public List<Profile> getUnapprovedFriends(long profileId) {
+        LOG.info("Inside #getUnapprovedFriends : (profileId = {})", profileId);
         return getUserDAO().getUnapprovedFriends(profileId);
     }
 
     public void approveFriend(long userId, long otherUserId) {
+        LOG.info("Inside #approveFriend : (userId = {})", userId);
         getUserDAO().updateFriendship(userId, otherUserId, true);
     }
 
     public void rejectFriend(long userId, long otherUserId) {
+        LOG.info("Inside #rejectFriend : (userId = {})", userId);
         getUserDAO().updateFriendship(userId, otherUserId, false);
     }
 
     public List<Profile> getFriends(long userId) {
+        LOG.info("Inside #getFriends : (userId = {})", userId);
         return getUserDAO().getFriendUsers(userId);
     }
 
     public Profile createUser(Profile pProfile){
-        LOG.info("Inside #validateProfileForRegistration : (pProfile = {})", pProfile);
-        Profile Profile = getUserDAO().createUser(pProfile);
-        LOG.info("Leaving #validateProfileForRegistration : (Profile = {})", Profile);
-        return Profile;
+        LOG.info("Inside #createUser : (pProfile = {})", pProfile);
+        Profile profile = getUserDAO().createUser(pProfile);
+        LOG.info("Leaving #createUser : (profile = {})", profile);
+        return profile;
     }
 
     public void assignDefaultPresets(Profile profile) {
+        LOG.info("Inside #assignDefaultPresets : (profile = {})", profile);
         Layout layout = copyDefaultLayout(profile.getId());
         Template template = copyDefaultTemplate(profile.getId());
         Category category = copyDefaultCategory(profile.getId(), layout.getLayoutId());
@@ -89,6 +97,7 @@ public class UserRepository {
     }
 
     private Layout copyDefaultLayout(long userId) {
+        LOG.info("Inside #copyDefaultLayout : (userId = {})", userId);
         Layout layout = getLayoutRepository().getLayoutById(0);
         Layout newLayout = new Layout();
         newLayout.setTitle(layout.getTitle());
@@ -103,6 +112,7 @@ public class UserRepository {
     }
 
     private Template copyDefaultTemplate(long userId) {
+        LOG.info("Inside #copyDefaultTemplate : (userId = {})", userId);
         Template template = getTemplateRepository().getTemplateById(0);
         Template newTemplate = new Template();
         newTemplate.setTitle(template.getTitle());
@@ -123,6 +133,7 @@ public class UserRepository {
     }
 
     private Category copyDefaultCategory(long userId, long layoutId) {
+        LOG.info("Inside #copyDefaultCategory : (userId = {})", userId);
         Category category = getCategoryRepository().getCategoryById(0);
         Category newCategory = new Category();
         newCategory.setTitle(category.getTitle());
@@ -136,6 +147,7 @@ public class UserRepository {
     }
 
     public boolean removeFriend(long profileId, long otherProfileId){
+        LOG.info("Inside #removeFriend : (profileId = {})", profileId);
         return getUserDAO().deleteFriendship(profileId, otherProfileId);
     }
 

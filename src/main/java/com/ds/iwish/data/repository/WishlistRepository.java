@@ -20,25 +20,29 @@ public class WishlistRepository {
 
 
     public Wishlist getWishlistById(long pWishlistId) {
+        LOG.info("Inside #getWishlistById : (pWishlistId = {})", pWishlistId);
         return getWishlistDAO().getWishlistById(pWishlistId);
     }
 
     public List<Wishlist> getWishlistsByUserId(long pUserId) {
+        LOG.info("Inside #getWishlistsByUserId : (pUserId = {})", pUserId);
         return getWishlistDAO().getWishlistsByUserId(pUserId);
     }
 
     public Wishlist createWishlist(Wishlist pWishlist) {
         LOG.info("Inside #createWishlist : (pWishlist = {})", pWishlist);
         Wishlist wishlist = getWishlistDAO().createWishlist(pWishlist);
-        LOG.info("Leaving #createWishlist : (template = {})", wishlist);
+        LOG.info("Leaving #createWishlist : (wishlist = {})", wishlist);
         return wishlist;
     }
 
     public Wishlist updateWishlist(Wishlist pWishlist) {
+        LOG.info("Inside #updateWishlist : (pWishlist = {})", pWishlist);
         return getWishlistDAO().updateWishlist(pWishlist);
     }
 
     public boolean deleteWishlist(long pWishlistId) {
+        LOG.info("Inside #deleteWishlist : (pWishlistId = {})", pWishlistId);
         return getWishlistDAO().deleteWishlist(pWishlistId);
     }
 

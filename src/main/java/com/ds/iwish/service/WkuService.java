@@ -23,6 +23,12 @@ public class WkuService {
         if (result != null) {
             return result;
         }
+        try {
+            int priority = Integer.parseInt(newWku.getPriorityRaw());
+            newWku.setPriority(priority);
+        } catch (NumberFormatException e) {
+            newWku.setPriorityRaw(null);
+        }
         getWkuManager().setDefaults(newWku);
         Wku wku = getWkuRepository().createWku(newWku);
         newWku.setWkuId(wku.getWkuId());
@@ -57,6 +63,12 @@ public class WkuService {
         String result = getWkuManager().validateWkuForUpdate(wku);
         if (result != null) {
             return result;
+        }
+        try {
+            int priority = Integer.parseInt(wku.getPriorityRaw());
+            wku.setPriority(priority);
+        } catch (NumberFormatException e) {
+            wku.setPriorityRaw(null);
         }
         getWkuManager().setDefaults(wku);
         getWkuRepository().updateWku(wku);

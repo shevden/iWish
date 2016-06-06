@@ -11,7 +11,6 @@
 
 <div id="header">
     <c:set var="showHeaderContents" value="true"/>
-    <c:set var="showHeaderRMandCancel" value="true"/>
     <%@ include file="common/header.jsp" %>
 </div>
 

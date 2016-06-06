@@ -20,25 +20,29 @@ public class CategoryRepository {
 
 
     public Category getCategoryById(long pCategoryId) {
+        LOG.info("Inside #getCategoryById : (pCategoryId = {})", pCategoryId);
         return getCategoryDAO().getCategoryById(pCategoryId);
     }
 
     public List<Category> getCategoriesByUserId(long pUserId) {
+        LOG.info("Inside #getCategoriesByUserId : (pUserId = {})", pUserId);
         return getCategoryDAO().getCategoriesByUserId(pUserId);
     }
 
     public Category createCategory(Category pCategory) {
         LOG.info("Inside #createCategory : (pCategory = {})", pCategory);
         Category category = getCategoryDAO().createCategory(pCategory);
-        LOG.info("Leaving #createCategory : (template = {})", category);
+        LOG.info("Leaving #createCategory : (category = {})", category);
         return category;
     }
 
     public Category updateCategory(Category pCategory) {
+        LOG.info("Inside #updateCategory : (pCategory = {})", pCategory);
         return getCategoryDAO().updateCategory(pCategory);
     }
 
     public boolean deleteCategory(long pCategoryId) {
+        LOG.info("Inside #deleteCategory : (pCategoryId = {})", pCategoryId);
         return getCategoryDAO().deleteCategory(pCategoryId);
     }
 

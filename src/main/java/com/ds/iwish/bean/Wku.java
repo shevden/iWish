@@ -28,6 +28,21 @@ public class Wku {
         categories = new ArrayList<>();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Wku wku = (Wku) o;
+
+        return wkuId == wku.wkuId;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (wkuId ^ (wkuId >>> 32));
+    }
 
     public long getWkuId() {
         return wkuId;

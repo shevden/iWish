@@ -43,18 +43,24 @@ public class SupportController {
             Category category = (Category) modelAndView.getModel().get("currentCategory");
             Layout layout = getLayoutService().getLayout(category.getLayoutId());
             List<Wku> content = getWkuService().getWkusByCategory(category.getCategoryId());
-            populateTemplatesPerWku(content);
-            modelAndView.addObject("content", content);
-            modelAndView.addObject("layout", layout);
+            populateModel(modelAndView, layout, content);
         } else if (modelAndView.getModel().containsKey("currentWishlist")) {
             Wishlist wishlist = (Wishlist) modelAndView.getModel().get("currentWishlist");
+            Layout layout = getLayoutService().getLayout(wishlist.getLayoutId());
             List<Wku> content = getWkuService().getWkusByWishlist(wishlist.getWishlistId());
-            modelAndView.addObject("content", content);
+            populateModel(modelAndView, layout, content);
         } else if (modelAndView.getModel().containsKey("currentGiftlist")) {
             Giftlist giftlist = (Giftlist) modelAndView.getModel().get("currentGiftlist");
+            Layout layout = getLayoutService().getLayout(giftlist.getLayoutId());
             List<Wku> content = getWkuService().getWkusByGiftlist(giftlist.getWishlistId());
-            modelAndView.addObject("content", content);
+            populateModel(modelAndView, layout, content);
         }
+    }
+
+    protected void populateModel(ModelAndView modelAndView, Layout layout, List<Wku> content) {
+        populateTemplatesPerWku(content);
+        modelAndView.addObject("content", content);
+        modelAndView.addObject("layout", layout);
     }
 
     private void populateTemplatesPerWku(List<Wku> content) {

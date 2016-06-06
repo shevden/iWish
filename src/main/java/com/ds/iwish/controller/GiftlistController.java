@@ -34,12 +34,13 @@ public class GiftlistController extends SupportController {
     public ModelAndView getGiftlist(@PathVariable("giftlistId") long giftlistId) {
         ModelAndView modelAndView = new ModelAndView();
         populateNavigationModel(modelAndView);
-        setupCurrentGiftlist(modelAndView, giftlistId);
+        populateCurrentGiftlist(modelAndView, giftlistId);
+        populateContent(modelAndView);
         modelAndView.setViewName("view-giftlist");
         return modelAndView;
     }
 
-    private Giftlist setupCurrentGiftlist(ModelAndView modelAndView, long giftlistId){
+    private Giftlist populateCurrentGiftlist(ModelAndView modelAndView, long giftlistId){
         Giftlist giftlist = getGiftlistService().getGiftlist(giftlistId);
         modelAndView.addObject("currentGiftlist", giftlist);
         return giftlist;
@@ -66,18 +67,19 @@ public class GiftlistController extends SupportController {
 
 
     @RequestMapping(value = "/catalog/edit-giftlist/{giftlistId}", method = RequestMethod.GET)
-    public ModelAndView getEditGiftlist(@PathVariable("giftlistId") long giftlistId, HttpServletRequest request) {
+    public ModelAndView getEditGiftlist(@PathVariable("giftlistId") long giftlistId) {
         ModelAndView modelAndView = new ModelAndView();
         populateNavigationModel(modelAndView);
         setupLayouts(modelAndView);
-        Giftlist giftlist = setupCurrentGiftlist(modelAndView, giftlistId);
-        setupFriendsForEdit(modelAndView, giftlist);
+        Giftlist giftlist = populateCurrentGiftlist(modelAndView, giftlistId);
+        populateContent(modelAndView);
+        populateFriendsForEdit(modelAndView, giftlist);
         modelAndView.setViewName(VIEW_NAME__EDIT_GIFTLIST);
 
         return modelAndView;
     }
 
-    private void setupFriendsForEdit(ModelAndView modelAndView, Giftlist giftlist){
+    private void populateFriendsForEdit(ModelAndView modelAndView, Giftlist giftlist){
         List<Profile> friends = getGiftlistService().getFriends();
         friends.removeAll(giftlist.getFriends());
         modelAndView.addObject("friends", friends);

@@ -33,12 +33,13 @@ public class WishlistController extends SupportController {
     public ModelAndView getWishlist(@PathVariable("wishlistId") long wishlistId) {
         ModelAndView modelAndView = new ModelAndView();
         populateNavigationModel(modelAndView);
-        setupCurrentWishlist(modelAndView, wishlistId);
+        populateCurrentWishlist(modelAndView, wishlistId);
+        populateContent(modelAndView);
         modelAndView.setViewName("view-wishlist");
         return modelAndView;
     }
 
-    private void setupCurrentWishlist(ModelAndView modelAndView, long wishlistId){
+    private void populateCurrentWishlist(ModelAndView modelAndView, long wishlistId){
         Wishlist wishlist = getWishlistService().getWishlist(wishlistId);
         modelAndView.addObject("currentWishlist", wishlist);
     }
@@ -63,7 +64,8 @@ public class WishlistController extends SupportController {
         ModelAndView modelAndView = new ModelAndView();
         populateNavigationModel(modelAndView);
         setupLayouts(modelAndView);
-        setupCurrentWishlist(modelAndView, wishlistId);
+        populateCurrentWishlist(modelAndView, wishlistId);
+        populateContent(modelAndView);
         Wishlist wishlistToEdit = getWishlistService().getWishlist(wishlistId);
         request.setAttribute("wishlist", wishlistToEdit);
         modelAndView.setViewName(VIEW_NAME__EDIT_WISHLIST);

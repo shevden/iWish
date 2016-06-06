@@ -32,7 +32,11 @@
 			<span>${currentWishlist.title}</span>
 		</div>
 
-		<%@ include file="home/demo-wish.jsp" %>
+		<c:if test="${empty content}">
+			<%@ include file="home/demo-wish.jsp" %>
+		</c:if>
+
+		<%@ include file="content/content.jsp" %>
 	</div>
 
 </div>

@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 
 <head>
@@ -19,21 +21,31 @@
 
     <div id="content-main">
 
-        <button id="near-search-btn" class="btn btn-success">Edit</button>
+        <a href="<c:url value="/catalog/edit-wku/${currentWku.wkuId}"/>" >
+            <button id="near-search-btn" class="btn btn-success">Edit</button>
+        </a>
 
         <%@ include file="search/search-wish.jsp" %>
 
         <div id="stage">
 
-            <div id="wish-title">Here goes the title</div>
+            <div id="wish-title">${currentWku.title}</div>
 
             <div id="wish-primary-wrapper">
-                <img src="no-src" id="wish-hero-img" />
+                <c:choose>
+                    <c:when test="${not empty currentWku.largeImageUrl}">
+                        <img src="<c:url value="/repository/images/${currentWku.largeImageUrl}" />" id="wish-hero-img" />
+                    </c:when>
+                    <c:otherwise>
+                        <img src="<c:url value="/repository/images/default-l.png" />" id="wish-hero-img" />
+                    </c:otherwise>
+                </c:choose>
 
-                <div id="wish-priority-label">Priority: 0-100</div>
+
+                <div id="wish-priority-label">Priority: ${currentWku.priority}</div>
 
                 <div>
-                    <%-- Description here --%>
+                    ${currentWku.description}
                 </div>
             </div>
 
@@ -42,15 +54,16 @@
                 <div class="edit-generic-wrapper-lt5">Categories</div>
 
                 <div class="btns-list">
-                    <div class="wish-category-tag-wrapper">
-                        <div class="nav-empty-elm wish-category-tag">Category 1</div>
-                    </div>
-                    <div class="wish-category-tag-wrapper">
-                        <div class="nav-empty-elm wish-category-tag">Category 2</div>
-                    </div>
-                    <div class="wish-category-tag-wrapper">
-                        <div class="nav-empty-elm wish-category-tag">Category 3</div>
-                    </div>
+                    <c:forEach var="category" items="${currentWku.categories}">
+                        <div class="wish-category-tag-wrapper">
+                            <a href="<c:url value="/catalog/view-category/${category.categoryId}" />">
+                                <div class="nav-empty-elm wish-category-tag"
+                                     style="color: #${category.color}; background: #${category.background}">
+                                     ${category.title}
+                                </div>
+                            </a>
+                        </div>
+                    </c:forEach>
                 </div>
 
             </div>
@@ -60,9 +73,11 @@
                 <div class="edit-generic-wrapper-lt5">Links</div>
 
                 <div class="btns-list">
-                    <div class="wish-remote-link">Link 1</div>
-                    <div class="wish-remote-link">Link 2</div>
-                    <div class="wish-remote-link">Link 3</div>
+                    <c:forEach var="remote" items="${currentWku.remotes}">
+                        <a href="${remote.remoteUrl}">
+                            <div class="wish-remote-link">${remote.remoteUrl}</div>
+                        </a>
+                    </c:forEach>
                 </div>
             </div>
 

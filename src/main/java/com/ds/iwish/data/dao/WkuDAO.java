@@ -4,6 +4,7 @@ import com.ds.iwish.bean.Category;
 import com.ds.iwish.bean.Remote;
 import com.ds.iwish.bean.Wku;
 import com.ds.iwish.data.dao.generic.GenericDAO;
+import com.ds.iwish.data.mapper.RemoteRowMapper;
 import com.ds.iwish.data.mapper.WkuRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,10 +23,14 @@ import java.util.List;
 public class WkuDAO extends GenericDAO {
 
     public static final String SQL_SELECT_FROM_WKU_BY_ID = "select * from wku where wku_id = ?";
+    public static final String SQL_SELECT_FROM_WKU_REMOTE = "select * from wku_remote where wku_id = ?";
+
     public static final String SQL_SELECT_FROM_WKU_BY_CATEGORY = "select * from wku where wku_id in " +
-            "(select wku_id from wku_category where category_id = ?) order by priority";
-    public static final String SQL_SELECT_FROM_WKU_BY_WISHLIST = "select * from wku where wishlist_id = ? order by priority";
-    public static final String SQL_SELECT_FROM_WKU_BY_TITLE = "select * from wku where title like ? order by priority";
+            "(select wku_id from wku_category where category_id = ?) order by priority DESC";
+    public static final String SQL_SELECT_FROM_WKU_BY_WISHLIST = "select * from wku where wishlist_id = ? order by priority DESC";
+    public static final String SQL_SELECT_FROM_WKU_BY_GIFTLIST = "select * from wku where giftlist_id = ? order by priority DESC";
+    public static final String SQL_SELECT_FROM_WKU_BY_TITLE = "select * from wku where title like ? order by priority DESC";
+    public static final String SQL_SELECT_FROM_WKU_BY_DESCRIPTION = "select * from wku where description like ? order by priority DESC";
 
     public static final String SQL_INSERT_INTO_WKU = "insert into wku  (TITLE, PRIORITY, LARGE_IMAGE_URL, " +
             "SMALL_IMAGE_URL, DESCRIPTION, TEMPLATE_ID, WISHLIST_ID, GIFTLIST_ID) " +
@@ -45,23 +50,45 @@ public class WkuDAO extends GenericDAO {
 
 
     public Wku getWkuById(long wkuId) {
-        List<Wku> templates = mJdbcTemplate.query(SQL_SELECT_FROM_WKU_BY_ID, new Object[]{wkuId},
+        List<Wku> templates = mJdbcTemplate.query(SQL_SELECT_FROM_WKU_BY_ID,
+                new Object[]{wkuId},
                 new WkuRowMapper());
         return templates.size() == 1? templates.get(0): null;
     }
 
+    public List<Remote> getRelatedRemotes(long wkuId) {
+        return mJdbcTemplate.query(SQL_SELECT_FROM_WKU_REMOTE,
+                new Object[]{wkuId},
+                new RemoteRowMapper());
+    }
+
     public List<Wku> getWkusByCategory(long categoryId) {
-        return mJdbcTemplate.query(SQL_SELECT_FROM_WKU_BY_CATEGORY, new Object[]{categoryId},
+        return mJdbcTemplate.query(SQL_SELECT_FROM_WKU_BY_CATEGORY,
+                new Object[]{categoryId},
                 new WkuRowMapper());
     }
 
     public List<Wku> getWkusByWishlist(long wishlistId) {
-        return mJdbcTemplate.query(SQL_SELECT_FROM_WKU_BY_WISHLIST, new Object[]{wishlistId},
+        return mJdbcTemplate.query(SQL_SELECT_FROM_WKU_BY_WISHLIST,
+                new Object[]{wishlistId},
+                new WkuRowMapper());
+    }
+
+    public List<Wku> getWkusByGiftlist(long wishlistId) {
+        return mJdbcTemplate.query(SQL_SELECT_FROM_WKU_BY_GIFTLIST,
+                new Object[]{wishlistId},
                 new WkuRowMapper());
     }
 
     public List<Wku> getWkusByTitle(String keyword) {
-        return mJdbcTemplate.query(SQL_SELECT_FROM_WKU_BY_TITLE, new Object[]{keyword},
+        return mJdbcTemplate.query(SQL_SELECT_FROM_WKU_BY_TITLE,
+                new Object[]{getStringForSqlLikeClause(keyword)},
+                new WkuRowMapper());
+    }
+
+    public List<Wku> getWkusByDescription(String keyword) {
+        return mJdbcTemplate.query(SQL_SELECT_FROM_WKU_BY_DESCRIPTION,
+                new Object[]{getStringForSqlLikeClause(keyword)},
                 new WkuRowMapper());
     }
 

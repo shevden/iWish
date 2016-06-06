@@ -21,7 +21,10 @@ import java.util.List;
 public class CategoryDAO extends GenericDAO {
 
     public static final String SQL_SELECT_FROM_CATEGORY_BY_ID = "select * from category where category_id = ?";
-    public static final String SQL_SELECT_FROM_CATEGORY_BY_USER_ID = "select * from category where user_id = ?";
+    public static final String SQL_SELECT_FROM_CATEGORY_BY_WKU_ID = "select * from category where category_id in" +
+            "(select category_id from wku_category where wku_id = ?)";
+    public static final String SQL_SELECT_FROM_CATEGORY_BY_USER_ID = "select * from category where user_id = ?" +
+            "order by priority DESC";
     public static final String SQL_INSERT_INTO_CATEGORY = "insert into category  (TITLE, PRIORITY, BACKGROUND, " +
             "COLOR, LAYOUT_ID, USER_ID) values(?, ?, ?, ?, ?, ?)";
     public static final String SQL_UPDATE_CATEGORY_BY_ID = "update category set TITLE = ?, PRIORITY = ?, BACKGROUND = ?, " +
@@ -36,6 +39,11 @@ public class CategoryDAO extends GenericDAO {
         List<Category> templates = mJdbcTemplate.query(SQL_SELECT_FROM_CATEGORY_BY_ID, new Object[]{categoryId},
                 new CategoryRowMapper());
         return templates.size() == 1? templates.get(0): null;
+    }
+
+    public List<Category> getCategoriesByWkuId(long wkuId) {
+        return mJdbcTemplate.query(SQL_SELECT_FROM_CATEGORY_BY_WKU_ID, new Object[]{wkuId},
+                new CategoryRowMapper());
     }
 
     public List<Category> getCategoriesByUserId(long userId) {

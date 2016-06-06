@@ -31,6 +31,7 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
+        LOG.debug("Access interception");
         Profile profile = ProfileHelper.getProfileFromSession();
         if (profile != null) {
             return processRecognizedProfile(request, response);

@@ -23,7 +23,8 @@ import java.util.List;
 @Repository
 public class GiftlistDAO {
 
-    public static final String SQL_SELECT_FROM_WISHLIST_BY_USER_ID = "select * from wishlist where user_id = ? and is_public = 1";
+    public static final String SQL_SELECT_FROM_WISHLIST_BY_USER_ID = "select * from wishlist where user_id = ? " +
+            "and is_public = 1 order by priority DESC";
     public static final String SQL_INSERT_INTO_WISHLIST = "insert into wishlist  (TITLE, PRIORITY, BACKGROUND, " +
             "COLOR, LAYOUT_ID, USER_ID, IS_PUBLIC) values(?, ?, ?, ?, ?, ?, ?)";
     public static final String SQL_SELECT_USER_FROM_GIFTLIST = "select friend_id from giftlist where wishlist_id = ?";

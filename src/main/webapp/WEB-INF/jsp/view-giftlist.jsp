@@ -29,10 +29,14 @@
 	<div id="stage">
 		<div class="stage-title">
 			<span class="grey">Giftlist: </span>
-			Here goes the title
+			${currentGiftlist.title}
 		</div>
 
-		<%@ include file="home/demo-wish.jsp" %>
+		<c:if test="${empty content}">
+			<%@ include file="home/demo-wish.jsp" %>
+		</c:if>
+
+		<%@ include file="content/content.jsp" %>
 	</div>
 
 </div>

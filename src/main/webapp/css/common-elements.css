@@ -17,6 +17,9 @@ textarea {
     resize: none;
 }
 
+a:hover {
+    text-decoration: none !important;
+}
 
 .b-red {
     background: #f16745;

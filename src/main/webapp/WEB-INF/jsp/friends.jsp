@@ -42,13 +42,13 @@
             <c:if test="${friends ne null}">
                 <c:forEach var="friend" items="${friends}">
                     <a href="<c:url value="/user/friends/${friend.id}" />">
-                        <div class="nav-empty-elm">${friend.firstName} ${friend.lastName}</div>
+                        <button type="button" class="btn btn-primary nav-btn">${friend.firstName} ${friend.lastName}</button>
                     </a>
                 </c:forEach>
             </c:if>
             <c:forEach var="giftlist" items="${giftlists}">
                 <a href="<c:url value="/user/friends/${currentFriend.id}/${giftlist.wishlistId}" />">
-                    <button class="btn btn-success nav-btn">${giftlist.title}</button>
+                    <button type="button" class="btn btn-success nav-btn">${giftlist.title}</button>
                 </a>
             </c:forEach>
         </div>
@@ -92,6 +92,8 @@
                     ${currentGiftlist.title}
                 </c:if>
             </div>
+
+            <%@ include file="content/content.jsp" %>
         </c:if>
     </div>
 

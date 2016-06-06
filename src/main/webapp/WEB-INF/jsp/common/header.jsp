@@ -5,7 +5,9 @@
 </div>
 <c:if test="${not empty sessionScope.profile}">
     <a href="<c:url value="/catalog/view-category/${sessionScope.profile.defaultCategory}" />">
+</c:if>
         <div id="header-subtitle">Driven by the wishflow &nbsp; :::::::::::: &nbsp; Powered by the dreams</div>
+<c:if test="${not empty sessionScope.profile}">
     </a>
 </c:if>
 

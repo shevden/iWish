@@ -44,6 +44,14 @@
             <mvc:exclude-mapping path="/repository/**" />
             <ref bean="accessInterceptor" />
         </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.ds.iwish.interceptor.OnboardInterceptor" />
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.ds.iwish.interceptor.TrafficRouterInterceptor" />
+        </mvc:interceptor>
     </mvc:interceptors>
 
     <mvc:resources mapping="/css/**" location="/css/" cache-period="0"/>
